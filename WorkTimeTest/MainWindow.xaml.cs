@@ -39,7 +39,7 @@ namespace WorkTimeTest
 
             var ReturnDataObject = JsonHelper.Deserialize<ReturnData>(ReturnDatastr);
 
-            string data = "";
+            string access_token = ReturnDataObject.data.access_token;
 
         }
 
