@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WorkTime.BaseModel
 {
-    public class User
+    public  class User
     {
 
-        public User()
+         public User()
         {
 
         }
@@ -17,43 +17,43 @@ namespace WorkTime.BaseModel
         /// <summary>
         /// 
         /// </summary>
-        public object name { get; set; }
+        public  object name { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public Int64 access_level { get; set; }
+        public  Int64 access_level { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public Int64 user_level { get; set; }
+        public  Int64 user_level { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public Int64 level_score { get; set; }
+        public  Int64 level_score { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string sex { get; set; }
+        public  string sex { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string image { get; set; }
+        public  string image { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string access_token { get; set; }
+        public  string access_token { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public DateTime expire_in { get; set; }
+        public  DateTime expire_in { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public DateTime create_time { get; set; }
+        public  DateTime create_time { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string detail_info { get; set; }
+        public  string detail_info { get; set; }
 
     }
 }

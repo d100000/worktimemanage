@@ -25,7 +25,7 @@
             
         </Grid>
         <Grid Row="1" ColumnSpan="3" Grid.Column="0">
-            <DataGrid  >
+            <DataGrid ItemsSource="{Binding DataItems}" >
                 
             </DataGrid>
         </Grid>

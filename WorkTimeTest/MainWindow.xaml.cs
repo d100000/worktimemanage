@@ -37,9 +37,17 @@ namespace WorkTimeTest
 
             var ReturnDatastr = NetHelper.HttpCall(url,null,HttpEnum.Get);
 
-            var ReturnDataObject = JsonHelper.Deserialize<ReturnData>(ReturnDatastr);
+            var ReturnDataObject = JsonHelper.Deserialize<ReturnData<User>>(ReturnDatastr);
 
             string access_token = ReturnDataObject.data.access_token;
+
+            string get_data = "http://api.timemanager.online/time_manager/data/select?access_token="+access_token;
+
+            var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
+
+            var datasObject = JsonHelper.Deserialize<ReturnData<List<WorkTimeData>>>(datas);
+
+            var tt = "";
 
         }
 
@@ -48,11 +56,11 @@ namespace WorkTimeTest
 
     }
 
-    public class ReturnData
+    public class ReturnData<T> where T :new ()
     {
         public int code;
         public string message;
-        public User data;
+        public T data;
     }
 
     public class User {
@@ -101,6 +109,71 @@ namespace WorkTimeTest
         /// 
         /// </summary>
         public string detail_info { get; set; }
+
+    }
+
+    class WorkTimeData
+    {
+        public WorkTimeData()
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Int64 __ID__ { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string title { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string project { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string message { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string work_info { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string detail { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string begint_ime { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string end_time { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string spend { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string state { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string text { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime create_time { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime update_time { get; set; }
 
     }
 }
