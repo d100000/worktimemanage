@@ -1,0 +1,92 @@
+﻿<Window x:Class="WorkTime.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:WorkTime.ViewModel"
+        xmlns:local="clr-namespace:WorkTime"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="805"
+        
+        WindowStyle="None"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        
+        
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        MouseDown="MoveWindows_MouseMove"
+        PreviewMouseDoubleClick="MainWindow_OnPreviewMouseDoubleClick"
+        
+        Style="{StaticResource WindowShadowStyle}"
+        >
+
+
+    <md:DialogHost x:Name="MainDialogHost" Identifier="RootDialog">
+        <md:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <md:DrawerHost.LeftDrawerContent >
+                <DockPanel MinWidth="150">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                        DockPanel.Dock="Top"
+                                        HorizontalAlignment="Right" 
+                                  Margin="10 10 25 0"
+                                  Height="30"
+                                  Width="30"
+                                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <ListBox SelectedIndex="0" PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp" ItemsSource="{Binding Items}" x:Name="ItemListBox"
+                              >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="viewmodel:ContorllerItem">
+                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </md:DrawerHost.LeftDrawerContent>
+            <DockPanel Background="{DynamicResource MaterialDesignPaper}">
+                <md:ColorZone DockPanel.Dock="Top"  Height="40" Padding="0 0 0 0" md:ShadowAssist.ShadowDepth="Depth2">
+                    <DockPanel Height="40">
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton"
+                                      ToolTip="功能目录"
+                              Height="30"
+                              Width="30"
+                              Margin="10 0 0 0"
+                              HorizontalAlignment="Left" 
+                              />
+                        <StackPanel HorizontalAlignment="Right"  DockPanel.Dock="Right"   Orientation="Horizontal">
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Width="30" Padding="0" 
+                                    Click="ButtonBase_OnClick" ToolTip="最小化">
+                                <md:PackIcon Kind="MinusCircleOutline" Width="30" Height="30" Foreground="{DynamicResource MaterialDesignDarkForeground}" />
+                            </Button>
+                            <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignFlatButton}" Padding="0" Width="30"
+                                     Click="CloseWindow_OnClick" ToolTip="关闭软件">
+                                <md:PackIcon Kind="CloseCircleOutline" Width="30" Height="30" Foreground="#e64a19" />
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </md:ColorZone>
+                <Grid>
+                    <ScrollViewer 
+                                  HorizontalScrollBarVisibility="{Binding ElementName=ItemListBox, Path=SelectedItem.HorizontalScrollBarVisibilityRequirement}"
+                                  VerticalScrollBarVisibility="{Binding ElementName=ItemListBox, Path=SelectedItem.VerticalScrollBarVisibilityRequirement}" 
+                                  Padding="{Binding ElementName=ItemListBox, Path=SelectedItem.MarginRequirement}">
+                        <ContentControl Content="{Binding ElementName=ItemListBox, Path=SelectedItem.Content}" />
+                    </ScrollViewer>
+                    <md:Snackbar MessageQueue="{md:MessageQueue}" x:Name="MainSnackbar"/>
+                </Grid>
+
+            </DockPanel>
+        </md:DrawerHost>
+    </md:DialogHost>
+</Window>
