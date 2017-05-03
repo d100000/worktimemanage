@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:WorkTime.ViewModel"
         xmlns:local="clr-namespace:WorkTime"
+        Icon="logo.ico"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="1205"
         

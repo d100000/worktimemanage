@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro, Version=1.4.3.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -148,6 +151,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="logo.ico" />
     <Content Include="libs\MahApps.Metro.dll" />
     <Content Include="libs\MaterialDesignColors.dll" />
     <Content Include="libs\MaterialDesignThemes.Wpf.dll" />

@@ -45,8 +45,9 @@ namespace WorkTime.Windows
             else
             {
                 MainWindow mainWindow=new MainWindow(ReturnDataObject.data.access_token);
-                mainWindow.ShowDialog();
                 Hide();
+                mainWindow.ShowDialog();
+                Close();
             }
         }
 

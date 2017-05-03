@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WorkTime.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        
+        Icon="../logo.ico"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
