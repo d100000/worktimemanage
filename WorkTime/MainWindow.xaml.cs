@@ -16,9 +16,12 @@ namespace WorkTime
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public static string AccessToken = "";
+
+        public MainWindow(string accessToken)
         {
             InitializeComponent();
+            AccessToken = accessToken;
 
             DataContext = new MainWindowViewModel();
 

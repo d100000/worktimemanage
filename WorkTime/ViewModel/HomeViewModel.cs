@@ -13,22 +13,18 @@ namespace WorkTime.ViewModel
     public class HomeViewModel
     {
         private ObservableCollection<WorkTimeData> _dataItems;
-    
+
         public ObservableCollection<WorkTimeData> DataItems
         {
-            get; set;
+            get { return _dataItems; }
+            set { _dataItems = value; }
         }
 
 
         public HomeViewModel()
         {
-            string url = "http://api.timemanager.online/time_manager/user/login?name=bobdong&pw=bobdong";
 
-            var ReturnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
-
-            var ReturnDataObject = JsonHelper.Deserialize<ReturnData<User>>(ReturnDatastr);
-
-            string access_token = ReturnDataObject.data.access_token;
+            string access_token = MainWindow.AccessToken;
 
             string get_data = "http://api.timemanager.online/time_manager/data/select?access_token=" + access_token;
 
@@ -37,10 +33,6 @@ namespace WorkTime.ViewModel
             var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<WorkTimeData>>>(datas);
             DataItems = datasObject.data;
         }
-
-
-
-
 
 
     }

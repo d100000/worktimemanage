@@ -6,7 +6,7 @@
         xmlns:viewmodel="clr-namespace:WorkTime.ViewModel"
         xmlns:local="clr-namespace:WorkTime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="805"
+        Title="MainWindow" Height="500" Width="1205"
         
         WindowStyle="None"
         WindowState="Normal"
