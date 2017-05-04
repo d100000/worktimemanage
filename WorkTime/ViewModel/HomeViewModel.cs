@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Helper;
 using WorkTime.BaseModel;
 
@@ -12,6 +13,11 @@ namespace WorkTime.ViewModel
 
     public class HomeViewModel
     {
+
+        public ICommand AddNewDataCommand;
+
+
+
         private ObservableCollection<WorkTimeData> _dataItems;
 
         public ObservableCollection<WorkTimeData> DataItems
@@ -32,6 +38,12 @@ namespace WorkTime.ViewModel
 
             var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<WorkTimeData>>>(datas);
             DataItems = datasObject.data;
+        }
+
+        public void AddNewData(object o)
+        {
+
+
         }
 
 

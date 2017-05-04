@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Helper;
 using MaterialDesignThemes.Wpf;
 using WorkTime.BaseModel;
@@ -22,33 +24,20 @@ namespace WorkTime.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
+
         public LoginWindow()
         {
             InitializeComponent();
+
         }
+        
 
         private void Login_click(object sender, RoutedEventArgs e)
         {
             string name = NameTextBox.Text;
             string pw = PasswordBox.Password;
 
-            string url = $"http://api.timemanager.online/time_manager/user/login?name={name}&pw={pw}";
-
-            var ReturnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
-
-            var ReturnDataObject = JsonHelper.Deserialize<ReturnData<User>>(ReturnDatastr);
-
-            if (ReturnDataObject.code != 0)
-            {
-                MessageTips(ReturnDataObject.message,sender,e);
-            }
-            else
-            {
-                MainWindow mainWindow=new MainWindow(ReturnDataObject.data.access_token);
-                Hide();
-                mainWindow.ShowDialog();
-                Close();
-            }
+            ShowLoadingDialog(name,pw);
         }
 
         private void Cancel_click(object sender, RoutedEventArgs e)
@@ -57,15 +46,60 @@ namespace WorkTime.Windows
             PasswordBox.Password = "";
         }
 
-        public async void MessageTips(string message, object sender, RoutedEventArgs e)
+        public async void MessageTips(string message)
         {
             var sampleMessageDialog = new MessageDialog
             {
                 Message = { Text = message }
             };
-
+            
             await DialogHost.Show(sampleMessageDialog, "LoginDialog");
+            
+        }
+
+        private async void ShowLoadingDialog(string name,string pw)
+        {
+            var loadingDialog = new LoadingDialog();
+
+            var result = await DialogHost.Show(loadingDialog, "LoginDialog", delegate (object sender, DialogOpenedEventArgs args)
+            {
+                Dispatcher Mainthread = Dispatcher.CurrentDispatcher;
+
+                ThreadStart start = delegate()
+                {
+                    string url = $"http://api.timemanager.online/time_manager/user/login?name={name}&pw={pw}";
+
+                    Thread.Sleep(3000);
+
+                    var ReturnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
+
+                    var ReturnDataObject = JsonHelper.Deserialize<ReturnData<User>>(ReturnDatastr);
+
+                    Mainthread.BeginInvoke(new Action(() =>// 异步更新界面
+                    {
+                        
+                        args.Session.Close(false);
+                        if (ReturnDataObject.code != 0)
+                        {
+                            MessageTips(ReturnDataObject.message);
+                        }
+                        else
+                        {
+                            MainWindow mainWindow = new MainWindow(ReturnDataObject.data.access_token);
+                            Hide();
+                            mainWindow.ShowDialog();
+                            Close();
+                        }
+                        // 线程结束后的操作
+                    }), DispatcherPriority.Normal);
+
+                };
+
+                new Thread(start).Start(); // 启动线程
+
+            });
 
         }
+
     }
 }
