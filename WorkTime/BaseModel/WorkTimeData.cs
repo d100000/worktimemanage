@@ -34,7 +34,7 @@ namespace WorkTime.BaseModel
         /// </summary>
         public Int64 __ID__
         {
-            //get { return _id; }
+            get { return _id; }
             set { _id = value; }
         }
 

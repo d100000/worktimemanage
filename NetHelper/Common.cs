@@ -19,7 +19,7 @@ namespace Helper
     /// - 由时间戳转为系统时间：ReturnDateTime
     /// - SHA1 加密：Sha1Sign
     /// </summary>
-    static class Common
+    public static class Common
     {
         /// <summary>
         /// 获取时间戳

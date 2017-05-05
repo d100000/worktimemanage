@@ -10,7 +10,7 @@
         
         Title="WorkTimeManager" MinHeight="600" MinWidth="1200"
 
-        WindowState="Maximized"
+        WindowState="Normal"
         WindowStartupLocation="CenterScreen"
        
         Background="{DynamicResource MaterialDesignPaper}"					  

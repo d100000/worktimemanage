@@ -82,6 +82,7 @@
     <Compile Include="BaseModel\ReturnData.cs" />
     <Compile Include="BaseModel\User.cs" />
     <Compile Include="BaseModel\WorkTimeData.cs" />
+    <Compile Include="Entity\WorkTimeData_ViewData.cs" />
     <Compile Include="StaticStat.cs" />
     <Compile Include="UserContorller\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -165,11 +166,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
+    <Resource Include="demo\logindemo.gif" />
     <Content Include="libs\Dragablz.dll" />
     <Content Include="libs\MahApps.Metro.dll" />
     <Content Include="libs\MaterialDesignColors.dll" />
     <Content Include="libs\MaterialDesignThemes.Wpf.dll" />
     <Content Include="libs\System.Windows.Interactivity.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

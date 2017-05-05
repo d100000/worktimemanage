@@ -153,7 +153,7 @@ namespace WorkTime.ViewModel
         {
             WorkTimeData postWorkTimeData=new WorkTimeData()
             {
-                work_date = WorkDateTime.ToLongDateString(),
+                work_date = Common.GetTimeSecond(WorkDateTime),
                 title = Title,
                 detail = Detail,
                 type = Type,
@@ -162,7 +162,9 @@ namespace WorkTime.ViewModel
                 end_time = End_time
             };
 
-            string get_data = "http://api.timemanager.online/time_manager/data/select?access_token=" + MainStaticData.AccessToken;
+            string temp = NetHelper.getProperties(postWorkTimeData);
+
+            string get_data = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
 
             var datas = NetHelper.HttpCall(get_data, JsonHelper.Serialize(postWorkTimeData), HttpEnum.Post);
 
