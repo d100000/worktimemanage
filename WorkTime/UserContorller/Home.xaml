@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:WorkTime.UserContorller"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             
+             d:DesignHeight="300" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -14,22 +15,42 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="108*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <Grid Row="0" ColumnSpan="3" Column="0" > 
-            <TextBox Foreground="AliceBlue" > Home WOrk Time Manager ! </TextBox>
+        <Grid Row="0" ColumnSpan="3" Column="0"  Margin="3 0 3 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="54*"/>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="180*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="40*"/>
+            </Grid.ColumnDefinitions>
+            <DatePicker Grid.Column="0" Margin="3 0 3 0" VerticalAlignment="Bottom" md:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding WorkDateTime}"/>
+            <ComboBox Grid.Column="1"  md:HintAssist.Hint="Type" IsEditable="False" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  Margin="3 0 3 0" ItemsSource="{Binding TypeCollection,Mode=TwoWay}" SelectedValue="{Binding Type}"/>
+            <TextBox Grid.Column="2"  VerticalAlignment="Bottom" md:HintAssist.Hint="Title"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="3 0 3 0"  TextWrapping="NoWrap" Text="{Binding Title}"/>
+
+            <TextBox Grid.Column="3" VerticalAlignment="Bottom" md:HintAssist.Hint="Detail"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="3 0 3 0" TextWrapping="Wrap" Text="{Binding Detail}"/>
+            <md:TimePicker Grid.Column="4"  Is24Hours="True" md:HintAssist.Hint="BeginTime"  VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"  Margin="3 0 3 0" />
+            <md:TimePicker Grid.Column="5"  Is24Hours="True" md:HintAssist.Hint="EndTime"  VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"   Margin="3 0 3 0" />
+            <ComboBox Grid.Column="6"  md:HintAssist.Hint="Status" IsEditable="False" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  Margin="3 0 10 0" ItemsSource="{Binding StatusCollection ,Mode=TwoWay}" SelectedValue="{Binding Status}"/>
+            <!--<TextBox Foreground="AliceBlue" > Home WOrk Time Manager ! </TextBox>-->
         </Grid>
-        <Grid  Row="0" ColumnSpan="3" >
-            
+        <Grid  Row="1" ColumnSpan="3" Grid.Column="0">
+            <Button Width="70" Height="30" HorizontalAlignment="Right" Margin="0 0 10 0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding AddNewDataCommand}">Add</Button>
         </Grid>
-        <Grid Row="1" ColumnSpan="3" Grid.Column="0">
+        <Grid Row="2" ColumnSpan="3" Grid.Column="0" Grid.RowSpan="2">
             <DataGrid ItemsSource="{Binding DataItems}" >
-                
+
             </DataGrid>
         </Grid>
-        <Grid Row="2" ColumnSpan="3" Grid.Column="0">
+        <Grid Grid.Row="3" ColumnSpan="3" Grid.Column="0">
 
         </Grid>
 

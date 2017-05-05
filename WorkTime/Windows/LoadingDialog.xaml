@@ -6,15 +6,12 @@
              xmlns:local="clr-namespace:WorkTime.Windows"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="80">
-    <Grid Height="80" Width="80">
-        <materialDesign:Card UniformCornerRadius="14" Padding="4" Height="40" Width="40" 
-                      VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" 
+             >
+    <Grid Height="40" Width="40">
+        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" 
                          Height="30" Width="30"
                          Value="0"
                          IsIndeterminate="True"                         
                       />
-        </materialDesign:Card>
     </Grid>
 </UserControl>

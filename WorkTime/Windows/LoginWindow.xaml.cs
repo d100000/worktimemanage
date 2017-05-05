@@ -22,7 +22,7 @@ namespace WorkTime.Windows
     /// <summary>
     /// LoginWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindow 
     {
 
         public LoginWindow()
@@ -85,6 +85,7 @@ namespace WorkTime.Windows
                         }
                         else
                         {
+                            MainStaticData.AccessToken = ReturnDataObject.data.access_token;
                             MainWindow mainWindow = new MainWindow(ReturnDataObject.data.access_token);
                             Hide();
                             mainWindow.ShowDialog();
@@ -101,5 +102,12 @@ namespace WorkTime.Windows
 
         }
 
+        private void LoginWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key==Key.Enter)
+            //{
+            //    this.Login_click(sender,e);
+            //}
+        }
     }
 }

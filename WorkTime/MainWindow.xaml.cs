@@ -14,7 +14,7 @@ namespace WorkTime
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public static string AccessToken = "";
 
@@ -28,35 +28,24 @@ namespace WorkTime
             Tips("Welcome to WorkTimeManager!");
         }
 
-
         #region  窗口动效事件
 
-        /// <summary>
-        ///     移动窗口事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MoveWindows_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
-        }
+        ///// <summary>
+        /////     移动窗口事件
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void MoveWindows_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (e.LeftButton == MouseButtonState.Pressed)
+        //        DragMove();
+        //}
 
-        private void MainWindow_OnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-            {
-                MainDialogHost.Margin = new Thickness(0);
-                // Environment.Exit(0);
-                WindowState = WindowState.Normal;
-            }
-            else
-            {
-                MainDialogHost.Margin = new Thickness(-9);
-                WindowState = WindowState.Maximized;
-            }
+        //private void MainWindow_OnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
 
-        }
+
+        //}
 
         #endregion
 
@@ -71,7 +60,7 @@ namespace WorkTime
 
             MenuToggleButton.IsChecked = false;
 
-            MessageTips("Test get MessageWindow !",sender,e);
+            MessageTips("Test get MessageWindow !", sender, e);
 
         }
 
@@ -91,7 +80,7 @@ namespace WorkTime
 
         }
 
-        public async void MessageTips(string message,object sender, RoutedEventArgs e)
+        public async void MessageTips(string message, object sender, RoutedEventArgs e)
         {
             var sampleMessageDialog = new MessageDialog
             {
@@ -102,19 +91,5 @@ namespace WorkTime
 
         }
 
-        /// <summary>
-        /// Minsize 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void CloseWindow_OnClick(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
     }
 }

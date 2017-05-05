@@ -22,6 +22,7 @@ namespace WorkTime.BaseModel
         private string _spend;
         private string _state;
         private string _text;
+        private string _workDate;
 
         public WorkTimeData()
         {
@@ -44,6 +45,12 @@ namespace WorkTime.BaseModel
         {
             get { return _title; }
             set { _title = value; }
+        }
+
+        public string work_date
+        {
+            get { return _workDate; }
+            set { _workDate = value; }
         }
 
         /// <summary>
@@ -94,7 +101,7 @@ namespace WorkTime.BaseModel
         /// <summary>
         /// 
         /// </summary>
-        public string begint_ime
+        public string begint_time
         {
             get { return _begintIme; }
             set { _begintIme = value; }

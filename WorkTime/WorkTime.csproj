@@ -40,6 +40,9 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz">
+      <HintPath>libs\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.4.3.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\MahApps.Metro.dll</HintPath>
@@ -79,10 +82,12 @@
     <Compile Include="BaseModel\ReturnData.cs" />
     <Compile Include="BaseModel\User.cs" />
     <Compile Include="BaseModel\WorkTimeData.cs" />
+    <Compile Include="StaticStat.cs" />
     <Compile Include="UserContorller\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AnotherCommandImplementation.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ContorllerItem.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -160,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
+    <Content Include="libs\Dragablz.dll" />
     <Content Include="libs\MahApps.Metro.dll" />
     <Content Include="libs\MaterialDesignColors.dll" />
     <Content Include="libs\MaterialDesignThemes.Wpf.dll" />

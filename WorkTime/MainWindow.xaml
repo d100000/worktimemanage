@@ -1,4 +1,4 @@
-﻿<Window x:Class="WorkTime.MainWindow"
+﻿<controls:MetroWindow x:Class="WorkTime.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,17 +7,17 @@
         xmlns:local="clr-namespace:WorkTime"
         Icon="logo.ico"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1205"
         
-        WindowStyle="None"
-        WindowState="Normal"
+        Title="WorkTimeManager" MinHeight="600" MinWidth="1200"
+
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Background="{x:Null}"
-        AllowsTransparency="True"
-        ResizeMode="NoResize"
-        
+       
+        Background="{DynamicResource MaterialDesignPaper}"					  
+        GlowBrush="{DynamicResource AccentColorBrush}"					  
         
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -26,10 +26,6 @@
 
         FontFamily="{DynamicResource MaterialDesignFont}"
         
-        MouseDown="MoveWindows_MouseMove"
-        PreviewMouseDoubleClick="MainWindow_OnPreviewMouseDoubleClick"
-        
-        Style="{StaticResource WindowShadowStyle}"
         >
 
 
@@ -65,7 +61,7 @@
                               Margin="10 0 0 0"
                               HorizontalAlignment="Left" 
                               />
-                        <StackPanel HorizontalAlignment="Right"  DockPanel.Dock="Right"   Orientation="Horizontal">
+                        <!--<StackPanel HorizontalAlignment="Right"  DockPanel.Dock="Right"   Orientation="Horizontal">
                             <Button Style="{StaticResource MaterialDesignFlatButton}" Width="30" Padding="0" 
                                     Click="ButtonBase_OnClick" ToolTip="最小化">
                                 <md:PackIcon Kind="MinusCircleOutline" Width="30" Height="30" Foreground="{DynamicResource MaterialDesignBody}" />
@@ -74,7 +70,7 @@
                                      Click="CloseWindow_OnClick" ToolTip="关闭软件">
                                 <md:PackIcon Kind="CloseCircleOutline" Width="30" Height="30" Foreground="#e64a19" />
                             </Button>
-                        </StackPanel>
+                        </StackPanel>-->
                     </DockPanel>
                 </md:ColorZone>
                 <Grid>
@@ -90,4 +86,4 @@
             </DockPanel>
         </md:DrawerHost>
     </md:DialogHost>
-</Window>
+</controls:MetroWindow>
