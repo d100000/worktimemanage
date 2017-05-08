@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorkTime.ViewModel;
 
 namespace WorkTime.UserContorller
 {
@@ -20,9 +21,13 @@ namespace WorkTime.UserContorller
     /// </summary>
     public partial class Home : UserControl
     {
+
+
         public Home()
         {
             InitializeComponent();
+ 
         }
+
     }
 }

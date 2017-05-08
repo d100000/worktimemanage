@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WorkTime.UserContorller"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:viewModel="clr-namespace:WorkTime.ViewModel"
              mc:Ignorable="d" 
-             
+             x:Name="HomeControl"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="300" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,24 +39,54 @@
             <TextBox Grid.Column="2"  VerticalAlignment="Bottom" md:HintAssist.Hint="Title"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="3 0 3 0"  TextWrapping="NoWrap" Text="{Binding Title}"/>
 
             <TextBox Grid.Column="3" VerticalAlignment="Bottom" md:HintAssist.Hint="Detail"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="3 0 3 0" TextWrapping="Wrap" Text="{Binding Detail}"/>
-            <md:TimePicker Grid.Column="4"  Is24Hours="True" md:HintAssist.Hint="BeginTime"  VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"  Margin="3 0 3 0" />
-            <md:TimePicker Grid.Column="5"  Is24Hours="True" md:HintAssist.Hint="EndTime"  VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"   Margin="3 0 3 0" />
+            <md:TimePicker Grid.Column="4"  Is24Hours="True" md:HintAssist.Hint="BeginTime"  VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"  Margin="3 0 3 0" SelectedTime="{Binding Begin_time}"/>
+            <md:TimePicker Grid.Column="5"  Is24Hours="True" md:HintAssist.Hint="EndTime"  VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"   Margin="3 0 3 0" SelectedTime="{Binding End_time}"/>
             <ComboBox Grid.Column="6"  md:HintAssist.Hint="Status" IsEditable="False" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="3 0 10 0" ItemsSource="{Binding StatusCollection ,Mode=TwoWay}" SelectedValue="{Binding Status}"/>
             <!--<TextBox Foreground="AliceBlue" > Home WOrk Time Manager ! </TextBox>-->
         </Grid>
         <Grid  Row="1" ColumnSpan="3" Grid.Column="0">
-            <Button Width="70" Height="30" HorizontalAlignment="Right" Margin="0 0 10 0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding AddNewDataCommand}">Add</Button>
+            <Button Width="70" Height="30" HorizontalAlignment="Right" Margin="0 0 10 0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding AddNewDataCommand}" CommandParameter="{Binding ElementName=HomeControl}">Add</Button>
         </Grid>
-        <Grid Row="2" ColumnSpan="3" Grid.Column="0" Grid.RowSpan="2">
-            <DataGrid ItemsSource="{Binding DataItems}" >
-
+        <Grid Row="2" ColumnSpan="3" Grid.Column="0" >
+            <DataGrid  ItemsSource="{Binding DataItems}"  CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding SelecTimeDataViewData}" AutoGenerateColumns="False"
+                       md:ShadowAssist.ShadowDepth="Depth2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding type}" Header="Type" Width="54*" />
+                    <DataGridTextColumn Binding="{Binding work_date}" Header="Work_data" Width="61*" />
+                    <DataGridTextColumn Binding="{Binding title}" Header="Title" Width="70*" />
+                    <md:MaterialDataGridTextColumn Binding="{Binding detail}" Header="Detail" Width="180*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="ToolTip" Value="{Binding detail}" >
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </md:MaterialDataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding begin_time}" Header="Begin_time" Width="50*" />
+                    <DataGridTextColumn Binding="{Binding end_time}" Header="End_time" Width="50*" />
+                    <DataGridTextColumn Binding="{Binding spend}" Header="Spend" Width="30*" />
+                    <DataGridTextColumn Binding="{Binding state}" Header="State" Width="40*" />
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding DeleteDataGridItemCommand}" CommandParameter="10" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
         </Grid>
-        <Grid Grid.Row="3" ColumnSpan="3" Grid.Column="0">
-
+        <Grid Grid.Row="3" ColumnSpan="3" Grid.Column="0" >
+            
         </Grid>
 
 
+        <md:Snackbar Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="3" MessageQueue="{md:MessageQueue}" IsActive="False"
+                                             x:Name="SnackbarOne" />
     </Grid>
 </UserControl>

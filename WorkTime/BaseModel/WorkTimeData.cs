@@ -17,7 +17,7 @@ namespace WorkTime.BaseModel
         private string _message;
         private string _workInfo;
         private string _detail;
-        private string _begintIme;
+        private string _beginTime;
         private string _endTime;
         private string _spend;
         private string _state;
@@ -101,10 +101,10 @@ namespace WorkTime.BaseModel
         /// <summary>
         /// 
         /// </summary>
-        public string begint_time
+        public string begin_time
         {
-            get { return _begintIme; }
-            set { _begintIme = value; }
+            get { return _beginTime; }
+            set { _beginTime = value; }
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace WorkTime.BaseModel
         /// </summary>
         public DateTime create_time
         {
-            //get { return _createTime; }
+            get { return _createTime; }
             set { _createTime = value; }
         }
 
@@ -157,7 +157,7 @@ namespace WorkTime.BaseModel
         /// </summary>
         public DateTime update_time
         {
-            //get { return _updateTime; }
+            get { return _updateTime; }
             set { _updateTime = value; }
         }
     }

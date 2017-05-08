@@ -67,22 +67,19 @@ namespace Helper
                 object value = item.GetValue(t, null);
                 if (item.PropertyType.IsValueType || item.PropertyType.Name.StartsWith("String"))
                 {
-                    if (item == properties[properties.Length])
+                    if (value==null)
                     {
-                        tStr += $"{name}={value}";
+                        continue;
                     }
-                    else
-                    {
-
-                        tStr += $"{name}={value}&";
-                    }
-
+                    tStr += $"{name}={value}&";
+                    
                 }
                 else
                 {
                     getProperties(value);
                 }
             }
+            tStr = tStr.Substring(0, tStr.Length - 1);
             return tStr;
         }
     }

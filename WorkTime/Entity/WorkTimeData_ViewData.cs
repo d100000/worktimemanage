@@ -3,20 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Helper;
 using WorkTime.BaseModel;
 
 namespace WorkTime.Entity
 {
-    class WorkTimeData_ViewData
+    public class WorkTimeData_ViewData
     {
         /// <summary>
         /// 原基础数据
         /// </summary>
         private WorkTimeData _workTimeData;
 
+
+
         public WorkTimeData_ViewData(WorkTimeData baseData)
         {
             _workTimeData = baseData;
+        }
+
+        public WorkTimeData_ViewData()
+        {
+
+        }
+
+        public WorkTimeData GetBaseData()
+        {
+            return _workTimeData;
+            
+        }
+
+        public void SetBaseData(WorkTimeData baseData)
+        {
+             _workTimeData= baseData;
+
+        }
+
+        public Int64 GetID()
+        {
+            return _workTimeData.__ID__;
         }
 
         public string title
@@ -27,8 +52,15 @@ namespace WorkTime.Entity
 
         public string work_date
         {
-            get { return _workTimeData.work_date; }
-            set { _workTimeData.work_date = value; }
+            get
+            {
+                return Common.ReturnDateTime(_workTimeData.work_date).ToShortDateString();
+
+            }
+            set
+            {
+                _workTimeData.work_date = (value);
+            }
         }
 
         /// <summary>
@@ -36,7 +68,7 @@ namespace WorkTime.Entity
         /// </summary>
         public string project
         {
-            get { return _workTimeData.project; }
+            //get { return _workTimeData.project; }
             set { _workTimeData.project = value; }
         }
 
@@ -54,7 +86,7 @@ namespace WorkTime.Entity
         /// </summary>
         public string message
         {
-            get { return _workTimeData.message; }
+            //get { return _workTimeData.message; }
             set { _workTimeData.message = value; }
         }
 
@@ -63,7 +95,7 @@ namespace WorkTime.Entity
         /// </summary>
         public string work_info
         {
-            get { return _workTimeData.work_info; }
+            //get { return _workTimeData.work_info; }
             set { _workTimeData.work_info = value; }
         }
 
@@ -79,10 +111,14 @@ namespace WorkTime.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string begint_time
+        public string begin_time
         {
-            get { return _workTimeData.begint_time; }
-            set { _workTimeData.begint_time = value; }
+            get
+            {
+                return Common.ReturnDateTime(_workTimeData.begin_time).ToShortTimeString();
+
+            }
+            set { _workTimeData.begin_time = value; }
         }
 
         /// <summary>
@@ -90,7 +126,11 @@ namespace WorkTime.Entity
         /// </summary>
         public string end_time
         {
-            get { return _workTimeData.end_time; }
+            get
+            {
+                return Common.ReturnDateTime(_workTimeData.end_time).ToShortTimeString();
+
+            }
             set { _workTimeData.end_time = value; }
         }
 
@@ -99,7 +139,20 @@ namespace WorkTime.Entity
         /// </summary>
         public string spend
         {
-            get { return _workTimeData.spend; }
+            get
+            {
+                if (_workTimeData.spend.Length < 1)
+                {
+                    return
+                        ((long.Parse(_workTimeData.end_time) - long.Parse(_workTimeData.begin_time)) / 60).ToString() +
+                        " Min";
+                }
+                else
+                {
+                    return (long.Parse(_workTimeData.spend) / 60).ToString() + " Min";
+                }
+
+            }
             set { _workTimeData.spend = value; }
         }
 
@@ -117,10 +170,9 @@ namespace WorkTime.Entity
         /// </summary>
         public string text
         {
-            get { return _workTimeData.text; }
+            //get { return _workTimeData.text; }
             set { _workTimeData.text = value; }
         }
-
 
 
 

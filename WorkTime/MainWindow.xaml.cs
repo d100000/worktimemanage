@@ -25,7 +25,7 @@ namespace WorkTime
 
             DataContext = new MainWindowViewModel();
 
-            Tips("Welcome to WorkTimeManager!");
+            //Tips("Welcome to WorkTimeManager!");
         }
 
         #region  窗口动效事件

@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Helper;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
-using Helper;
 using WorkTime.BaseModel;
+using WorkTime.Entity;
 
 namespace WorkTime.ViewModel
 {
 
     public class HomeViewModel:BaseViewModel
     {
+        #region  声明
 
         public ICommand AddNewDataCommand => new AnotherCommandImplementation(AddNewData);
+        public AutoCommand DeleteDataGridItemCommand => new AutoCommand(DeleteDataGridItem);
 
-        private WorkTimeData _newData;
+        private WorkTimeData _newData = new WorkTimeData();
 
-        private ObservableCollection<WorkTimeData> _dataItems;
-
-        public ObservableCollection<WorkTimeData> DataItems
-        {
-            get { return _dataItems; }
-            set
-            {
-                this.MutateVerbose(ref _dataItems, value, RaisePropertyChanged());
-            }
-        }
-
+        private ObservableCollection<WorkTimeData_ViewData> _dataItems = new ObservableCollection<WorkTimeData_ViewData>();
 
         private ObservableCollection<string> _statusCollection;
         private DateTime _workDateTime;
@@ -38,8 +30,42 @@ namespace WorkTime.ViewModel
         private string _detail;
         private string _status;
         private ObservableCollection<string> _typeCollection;
-        private string _beginTime;
-        private string _endTime;
+        private DateTime _beginTime=DateTime.Now;
+        private DateTime _endTime=DateTime.Now;
+        private WorkTimeData_ViewData _selecTimeDataViewData;
+        private string _snackBarMessage;
+
+
+        #endregion 
+
+
+        public ObservableCollection<WorkTimeData_ViewData> DataItems
+        {
+            get { return _dataItems; }
+            set
+            {
+                this.MutateVerbose(ref _dataItems, value, RaisePropertyChanged());
+            }
+        }
+
+        public WorkTimeData_ViewData SelecTimeDataViewData
+        {
+            get { return _selecTimeDataViewData; }
+            set
+            {
+                this.MutateVerbose(ref _selecTimeDataViewData, value, RaisePropertyChanged());
+
+            }
+        }
+
+        public string SnackBarMessage
+        {
+            get { return _snackBarMessage; }
+            set
+            {
+                this.MutateVerbose(ref _snackBarMessage, value, RaisePropertyChanged());
+            }
+        }
 
         public ObservableCollection<string> StatusCollection
         {
@@ -92,16 +118,33 @@ namespace WorkTime.ViewModel
             set { this.MutateVerbose(ref _status, value, RaisePropertyChanged()); }
         }
 
-        public string Begin_time
+        public DateTime Begin_time
         {
             get { return _beginTime; }
-            set { _beginTime = value; }
+            set
+            {
+                this.MutateVerbose(ref _beginTime, value, RaisePropertyChanged());
+                this.OnPropertyChanged("Spend");
+            }
         }
 
-        public string End_time
+        public DateTime End_time
         {
             get { return _endTime; }
-            set { _endTime = value; }
+            set
+            {
+                this.MutateVerbose(ref _endTime, value, RaisePropertyChanged());
+                this.OnPropertyChanged("Spend");
+            }
+        }
+
+        private string Spend {
+            get
+            {
+                return
+                    (long.Parse(Common.GetTimeSecond(End_time)) - (long.Parse(Common.GetTimeSecond(Begin_time))))
+                    .ToString();
+            }
         }
 
         #endregion
@@ -125,14 +168,29 @@ namespace WorkTime.ViewModel
             var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
 
             var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<WorkTimeData>>>(datas);
-            DataItems = datasObject.data;
+
+            foreach (var item in datasObject.data)
+            {
+                DataItems.Add(new WorkTimeData_ViewData(item));
+            }
+
+            // 初始化
             inint();
+
+            #region 注册点击事件
+
+
+
+            #endregion
+
+
         }
         /// <summary>
         /// 初始化，读取在线配置信息
         /// </summary>
         private void inint()
         {
+
             StatusCollection = MainStaticData.StstusCollection;
 
             TypeCollection = MainStaticData.TypeCollection;
@@ -141,36 +199,66 @@ namespace WorkTime.ViewModel
 
             Status = StatusCollection.First();
 
-            #region 注册点击事件
 
-
-
-
-            #endregion 
         }
 
         public void AddNewData(object o)
         {
-            WorkTimeData postWorkTimeData=new WorkTimeData()
+            WorkTimeData postWorkTimeData =new WorkTimeData()
             {
                 work_date = Common.GetTimeSecond(WorkDateTime),
                 title = Title,
                 detail = Detail,
                 type = Type,
                 state = Status,
-                begint_time = Begin_time,
-                end_time = End_time
+                begin_time = Common.GetTimeSecond(Begin_time),
+                end_time = Common.GetTimeSecond(End_time),
+                spend = (long.Parse(Common.GetTimeSecond(End_time))- (long.Parse(Common.GetTimeSecond(Begin_time)))).ToString()
             };
 
             string temp = NetHelper.getProperties(postWorkTimeData);
 
             string get_data = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
 
-            var datas = NetHelper.HttpCall(get_data, JsonHelper.Serialize(postWorkTimeData), HttpEnum.Post);
+            var datas = NetHelper.HttpCall(get_data, temp, HttpEnum.Post);
 
-            string data = "";
+            var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
+            if (returnData.code == 0)
+            {
+                DataItems.Add(new WorkTimeData_ViewData(returnData.data));
+
+                Title = "";
+                Detail = "";
+            }
+            else
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(500);
+                }).ContinueWith(t =>
+                {
+                    ((UserContorller.Home)o).SnackbarOne.MessageQueue.Enqueue(returnData.message);
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+
+            }
+
 
         }
+
+        public void DeleteDataGridItem(object o)
+        {
+            Int64 id = SelecTimeDataViewData.GetID();
+            string deleteData = "http://api.timemanager.online/time_manager/data/delete?access_token=" + MainStaticData.AccessToken+"&id="+ id;
+            var datas = NetHelper.HttpCall(deleteData, null, HttpEnum.Get);
+
+            var returnData = JsonHelper.Deserialize<ReturnData<object>>(datas);
+            if (returnData.code == 0)
+            {
+                DataItems.Remove(SelecTimeDataViewData);
+            }
+        
+        }
+
 
 
 

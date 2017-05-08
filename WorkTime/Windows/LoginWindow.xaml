@@ -49,7 +49,7 @@
             <materialDesign:PackIcon Margin="10 0 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
             <PasswordBox x:Name="PasswordBox"
                      materialDesign:HintAssist.Hint="Password" 
-                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                         PreviewKeyDown="PasswordBox_OnPreviewKeyDown"
                          Width="170"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >

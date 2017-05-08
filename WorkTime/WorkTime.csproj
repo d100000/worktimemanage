@@ -88,6 +88,7 @@
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AnotherCommandImplementation.cs" />
+    <Compile Include="ViewModel\AutoCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ContorllerItem.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
