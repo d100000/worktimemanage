@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WorkTime.BaseModel;
@@ -18,6 +19,9 @@ namespace WorkTime.ViewModel
 
         public ICommand AddNewDataCommand => new AnotherCommandImplementation(AddNewData);
         public AutoCommand DeleteDataGridItemCommand => new AutoCommand(DeleteDataGridItem);
+        public AutoCommand DataGridMouseDoubleClickCommand=>new AutoCommand(DataGridMouseDoubleClick);
+        public AutoCommand CleanDataCommand => new AutoCommand(CleanData);
+        public AutoCommand EditDataCommand => new AutoCommand(EditData);
 
         private WorkTimeData _newData = new WorkTimeData();
 
@@ -34,10 +38,30 @@ namespace WorkTime.ViewModel
         private DateTime _endTime=DateTime.Now;
         private WorkTimeData_ViewData _selecTimeDataViewData;
         private string _snackBarMessage;
+        private Visibility _addVisibility=Visibility.Visible;
+        private Visibility _editVisibility=Visibility.Collapsed;
 
+        #endregion
 
-        #endregion 
+        public Visibility AddVisibility
+        {
+            get { return _addVisibility; }
+            set
+            {
+                this.MutateVerbose(ref _addVisibility, value, RaisePropertyChanged());
 
+            }
+        }
+
+        public Visibility EditVisibility
+        {
+            get { return _editVisibility; }
+            set
+            {
+                this.MutateVerbose(ref _editVisibility, value, RaisePropertyChanged());
+
+            }
+        }
 
         public ObservableCollection<WorkTimeData_ViewData> DataItems
         {
@@ -169,20 +193,20 @@ namespace WorkTime.ViewModel
 
             var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<WorkTimeData>>>(datas);
 
-            foreach (var item in datasObject.data)
+            if (datasObject.code != 0)
             {
-                DataItems.Add(new WorkTimeData_ViewData(item));
+
+            }
+            else
+            {
+                foreach (var item in datasObject.data)
+                {
+                    DataItems.Add(new WorkTimeData_ViewData(item));
+                }
             }
 
             // 初始化
             inint();
-
-            #region 注册点击事件
-
-
-
-            #endregion
-
 
         }
         /// <summary>
@@ -207,20 +231,20 @@ namespace WorkTime.ViewModel
             WorkTimeData postWorkTimeData =new WorkTimeData()
             {
                 work_date = Common.GetTimeSecond(WorkDateTime),
-                title = Title,
-                detail = Detail,
-                type = Type,
-                state = Status,
-                begin_time = Common.GetTimeSecond(Begin_time),
-                end_time = Common.GetTimeSecond(End_time),
-                spend = (long.Parse(Common.GetTimeSecond(End_time))- (long.Parse(Common.GetTimeSecond(Begin_time)))).ToString()
+                title = this.Title,
+                detail = this.Detail,
+                type = this.Type,
+                state = this.Status,
+                begin_time = Common.GetTimeSecond(this.Begin_time),
+                end_time = Common.GetTimeSecond(this.End_time),
+                spend = (long.Parse(Common.GetTimeSecond(this.End_time))- (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
             };
 
             string temp = NetHelper.getProperties(postWorkTimeData);
 
-            string get_data = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
+            string add_url = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
 
-            var datas = NetHelper.HttpCall(get_data, temp, HttpEnum.Post);
+            var datas = NetHelper.HttpCall(add_url, temp, HttpEnum.Post);
 
             var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
             if (returnData.code == 0)
@@ -259,6 +283,48 @@ namespace WorkTime.ViewModel
         
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="o"></param>
+        public void DataGridMouseDoubleClick(object o)
+        {
+            this.Title = SelecTimeDataViewData.title;
+            this.Detail = SelecTimeDataViewData.detail;
+            this.Begin_time = Common.ReturnDateTime(SelecTimeDataViewData.GetBaseData().begin_time) ;
+            this.End_time = Common.ReturnDateTime(SelecTimeDataViewData.GetBaseData().end_time) ;
+            this.Type = SelecTimeDataViewData.type;
+            this.WorkDateTime = Common.ReturnDateTime(SelecTimeDataViewData.GetBaseData().work_date);
+            this.Status = SelecTimeDataViewData.state;
+
+
+            this.AddVisibility=Visibility.Collapsed;
+            this.EditVisibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="o"></param>
+        public void CleanData(object o)
+        {
+            Title = "";
+            Detail = "";
+
+            this.AddVisibility = Visibility.Visible;
+            this.EditVisibility = Visibility.Collapsed;
+
+            WorkDateTime = DateTime.Now;
+            Begin_time= DateTime.Now;
+            End_time= DateTime.Now;
+
+            Status = StatusCollection.First();
+        }
+
+        public void EditData(object o)
+        {
+
+        }
 
 
 

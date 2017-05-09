@@ -46,11 +46,21 @@
             <!--<TextBox Foreground="AliceBlue" > Home WOrk Time Manager ! </TextBox>-->
         </Grid>
         <Grid  Row="1" ColumnSpan="3" Grid.Column="0">
-            <Button Width="70" Height="30" HorizontalAlignment="Right" Margin="0 0 10 0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding AddNewDataCommand}" CommandParameter="{Binding ElementName=HomeControl}">Add</Button>
+            <StackPanel  Height="40" HorizontalAlignment="Right" Margin="0 0 10 0" Orientation="Horizontal">
+                <Button Content="{md:PackIcon Broom}"                                       
+                    ToolTip="Clean Data" Height="20" Width="20" Padding="0" Margin="10 0 10 0" Command="{Binding CleanDataCommand}">
+                </Button>
+                <Button Width="70" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding AddNewDataCommand}" CommandParameter="{Binding ElementName=HomeControl}" Visibility="{Binding AddVisibility}">Add</Button>
+                <Button Width="70" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding EditDataCommand}" CommandParameter="{Binding ElementName=HomeControl}" Visibility="{Binding EditVisibility}">Edit</Button>
+            </StackPanel>
         </Grid>
         <Grid Row="2" ColumnSpan="3" Grid.Column="0" >
-            <DataGrid  ItemsSource="{Binding DataItems}"  CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding SelecTimeDataViewData}" AutoGenerateColumns="False"
-                       md:ShadowAssist.ShadowDepth="Depth2">
+            <DataGrid  ItemsSource="{Binding DataItems}"  CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding SelecTimeDataViewData}" AutoGenerateColumns="False" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding DataGridMouseDoubleClickCommand}" CommandParameter="10" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding type}" Header="Type" Width="54*" />
                     <DataGridTextColumn Binding="{Binding work_date}" Header="Work_data" Width="61*" />
