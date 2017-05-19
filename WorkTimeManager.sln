@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "NetHelper\Helper.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTimeTest", "WorkTimeTest\WorkTimeTest.csproj", "{21D8E63C-3406-44B0-AD69-4BE9BE509503}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTimeManager2.0", "WorkTimeManager2.0\WorkTimeManager2.0.csproj", "{32845F6D-2539-4FD1-AAAB-24A259C20964}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

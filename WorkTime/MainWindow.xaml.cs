@@ -18,34 +18,32 @@ namespace WorkTime
     {
         public static string AccessToken = "";
 
-        public MainWindow(string accessToken)
+        public MainWindow()
         {
-            InitializeComponent();
-            AccessToken = accessToken;
+            // 初始化登录窗口
+            LoginWindow loginWindowDialog = new LoginWindow();
 
-            DataContext = new MainWindowViewModel();
+            loginWindowDialog.ShowDialog();
+            if (string.IsNullOrEmpty(MainStaticData.AccessToken))
+            {
+                Close();
+            }
+            else
+            {
+
+
+                InitializeComponent();
+
+                DataContext = new MainWindowViewModel();
+                
+            }
 
             //Tips("Welcome to WorkTimeManager!");
         }
 
         #region  窗口动效事件
 
-        ///// <summary>
-        /////     移动窗口事件
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void MoveWindows_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //        DragMove();
-        //}
 
-        //private void MainWindow_OnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-
-
-        //}
 
         #endregion
 
@@ -63,6 +61,13 @@ namespace WorkTime
             MessageTips("Test get MessageWindow !", sender, e);
 
         }
+
+        public void SetAccessToken(string accessToken)
+        {
+
+            AccessToken = accessToken;
+        }
+
 
         /// <summary>
         /// 500毫秒后提醒

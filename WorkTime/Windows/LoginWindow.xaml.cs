@@ -25,6 +25,8 @@ namespace WorkTime.Windows
     public partial class LoginWindow 
     {
 
+        Dispatcher Mainthread = Dispatcher.CurrentDispatcher;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -37,7 +39,8 @@ namespace WorkTime.Windows
             string name = NameTextBox.Text;
             string pw = PasswordBox.Password;
 
-            ShowLoadingDialog(name,pw);
+            ShowLoadingDialog(name, pw);
+
         }
 
         private void Cancel_click(object sender, RoutedEventArgs e)
@@ -57,25 +60,23 @@ namespace WorkTime.Windows
             
         }
 
-        private async void ShowLoadingDialog(string name,string pw)
+        private  void ShowLoadingDialog(string name,string pw)
         {
             var loadingDialog = new LoadingDialog();
 
-            var result = await DialogHost.Show(loadingDialog, "LoginDialog", delegate (object sender, DialogOpenedEventArgs args)
+            var result =  DialogHost.Show(loadingDialog, "LoginDialog", delegate (object sender, DialogOpenedEventArgs args)
             {
-                Dispatcher Mainthread = Dispatcher.CurrentDispatcher;
+
 
                 ThreadStart start = delegate()
                 {
                     string url = $"http://api.timemanager.online/time_manager/user/login?name={name}&pw={pw}";
 
-                    Thread.Sleep(3000);
-
                     var ReturnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
 
                     var ReturnDataObject = JsonHelper.Deserialize<ReturnData<User>>(ReturnDatastr);
 
-                    Mainthread.BeginInvoke(new Action(() =>// 异步更新界面
+                    Mainthread.BeginInvoke((Action)delegate ()// 异步更新界面
                     {
                         
                         args.Session.Close(false);
@@ -86,13 +87,10 @@ namespace WorkTime.Windows
                         else
                         {
                             MainStaticData.AccessToken = ReturnDataObject.data.access_token;
-                            MainWindow mainWindow = new MainWindow(ReturnDataObject.data.access_token);
-                            Hide();
-                            mainWindow.ShowDialog();
                             Close();
                         }
                         // 线程结束后的操作
-                    }), DispatcherPriority.Normal);
+                    });
 
                 };
 

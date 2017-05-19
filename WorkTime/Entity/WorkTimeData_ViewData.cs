@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Helper;
 using WorkTime.BaseModel;
+using WorkTime.ViewModel;
 
 namespace WorkTime.Entity
 {
-    public class WorkTimeData_ViewData
+    public class WorkTimeData_ViewData: BaseViewModel
     {
         /// <summary>
         /// 原基础数据
@@ -47,7 +48,11 @@ namespace WorkTime.Entity
         public string title
         {
             get { return _workTimeData.title; }
-            set { _workTimeData.title = value; }
+            set
+            {
+                _workTimeData.title = value;
+                this.OnPropertyChanged("title");
+            }
         }
 
         public string work_date
@@ -60,6 +65,7 @@ namespace WorkTime.Entity
             set
             {
                 _workTimeData.work_date = (value);
+                this.OnPropertyChanged("work_date");
             }
         }
 
@@ -69,7 +75,12 @@ namespace WorkTime.Entity
         public string project
         {
             //get { return _workTimeData.project; }
-            set { _workTimeData.project = value; }
+            set
+            {
+                _workTimeData.project = value;
+                this.OnPropertyChanged("project");
+
+            }
         }
 
         /// <summary>
@@ -78,7 +89,11 @@ namespace WorkTime.Entity
         public string type
         {
             get { return _workTimeData.type; }
-            set { _workTimeData.type = value; }
+            set
+            {
+                _workTimeData.type = value;
+                this.OnPropertyChanged("type");
+            }
         }
 
         /// <summary>
@@ -87,7 +102,11 @@ namespace WorkTime.Entity
         public string message
         {
             //get { return _workTimeData.message; }
-            set { _workTimeData.message = value; }
+            set
+            {
+                _workTimeData.message = value;
+                this.OnPropertyChanged("message");
+            }
         }
 
         /// <summary>
@@ -96,7 +115,11 @@ namespace WorkTime.Entity
         public string work_info
         {
             //get { return _workTimeData.work_info; }
-            set { _workTimeData.work_info = value; }
+            set
+            {
+                _workTimeData.work_info = value;
+                this.OnPropertyChanged("work_info");
+            }
         }
 
         /// <summary>
@@ -105,7 +128,11 @@ namespace WorkTime.Entity
         public string detail
         {
             get { return _workTimeData.detail; }
-            set { _workTimeData.detail = value; }
+            set
+            {
+                _workTimeData.detail = value;
+                this.OnPropertyChanged("detail");
+            }
         }
 
         /// <summary>
@@ -118,7 +145,11 @@ namespace WorkTime.Entity
                 return Common.ReturnDateTime(_workTimeData.begin_time).ToShortTimeString();
 
             }
-            set { _workTimeData.begin_time = value; }
+            set
+            {
+                _workTimeData.begin_time = value;
+                this.OnPropertyChanged("begin_time");
+            }
         }
 
         /// <summary>
@@ -131,7 +162,11 @@ namespace WorkTime.Entity
                 return Common.ReturnDateTime(_workTimeData.end_time).ToShortTimeString();
 
             }
-            set { _workTimeData.end_time = value; }
+            set
+            {
+                _workTimeData.end_time = value;
+                this.OnPropertyChanged("end_time");
+            }
         }
 
         /// <summary>
@@ -153,7 +188,11 @@ namespace WorkTime.Entity
                 }
 
             }
-            set { _workTimeData.spend = value; }
+            set
+            {
+                _workTimeData.spend = value;
+                this.OnPropertyChanged("spend");
+            }
         }
 
         /// <summary>
@@ -162,7 +201,11 @@ namespace WorkTime.Entity
         public string state
         {
             get { return _workTimeData.state; }
-            set { _workTimeData.state = value; }
+            set
+            {
+                _workTimeData.state = value;
+                this.OnPropertyChanged("state");
+            }
         }
 
         /// <summary>
@@ -171,7 +214,11 @@ namespace WorkTime.Entity
         public string text
         {
             //get { return _workTimeData.text; }
-            set { _workTimeData.text = value; }
+            set
+            {
+                _workTimeData.text = value;
+                this.OnPropertyChanged("text");
+            }
         }
 
 

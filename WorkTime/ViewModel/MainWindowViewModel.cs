@@ -18,6 +18,7 @@ namespace WorkTime.ViewModel
             {
                 new ContorllerItem("Home", new Home(){ DataContext = new HomeViewModel() })
             };
+            
 
         }
 

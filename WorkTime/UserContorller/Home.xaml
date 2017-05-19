@@ -9,8 +9,12 @@
              xmlns:viewModel="clr-namespace:WorkTime.ViewModel"
              mc:Ignorable="d" 
              x:Name="HomeControl"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="300" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="10" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -48,14 +52,14 @@
         <Grid  Row="1" ColumnSpan="3" Grid.Column="0">
             <StackPanel  Height="40" HorizontalAlignment="Right" Margin="0 0 10 0" Orientation="Horizontal">
                 <Button Content="{md:PackIcon Broom}"                                       
-                    ToolTip="Clean Data" Height="20" Width="20" Padding="0" Margin="10 0 10 0" Command="{Binding CleanDataCommand}">
+                    ToolTip="Clean Data" Height="20" Width="20" Padding="0" Margin="10 0 10 0" Command="{Binding CleanDataCommand}" >
                 </Button>
                 <Button Width="70" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding AddNewDataCommand}" CommandParameter="{Binding ElementName=HomeControl}" Visibility="{Binding AddVisibility}">Add</Button>
                 <Button Width="70" Style="{StaticResource MaterialDesignRaisedDarkButton}" Command="{Binding EditDataCommand}" CommandParameter="{Binding ElementName=HomeControl}" Visibility="{Binding EditVisibility}">Edit</Button>
             </StackPanel>
         </Grid>
         <Grid Row="2" ColumnSpan="3" Grid.Column="0" >
-            <DataGrid  ItemsSource="{Binding DataItems}"  CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding SelecTimeDataViewData}" AutoGenerateColumns="False" >
+            <DataGrid  ItemsSource="{Binding DataItems,Mode=TwoWay}"  CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding SelecTimeDataViewData}" AutoGenerateColumns="False" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <i:InvokeCommandAction Command="{Binding DataGridMouseDoubleClickCommand}" CommandParameter="10" />
