@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTimeManager", "WorkTimeManager\WorkTimeManager.csproj", "{E1D9CF19-573B-403F-B869-EB2939EF8230}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTime", "WorkTime\WorkTime.csproj", "{047FB266-32BA-4779-8BEE-2F2ED7443B30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "定时任务", "定时任务\定时任务.csproj", "{AD418802-13AE-437A-A534-5BDCC802F615}"
@@ -13,18 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "NetHelper\Helper.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTimeTest", "WorkTimeTest\WorkTimeTest.csproj", "{21D8E63C-3406-44B0-AD69-4BE9BE509503}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTimeManager2.0", "WorkTimeManager2.0\WorkTimeManager2.0.csproj", "{32845F6D-2539-4FD1-AAAB-24A259C20964}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E1D9CF19-573B-403F-B869-EB2939EF8230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1D9CF19-573B-403F-B869-EB2939EF8230}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1D9CF19-573B-403F-B869-EB2939EF8230}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1D9CF19-573B-403F-B869-EB2939EF8230}.Release|Any CPU.Build.0 = Release|Any CPU
 		{047FB266-32BA-4779-8BEE-2F2ED7443B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{047FB266-32BA-4779-8BEE-2F2ED7443B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{047FB266-32BA-4779-8BEE-2F2ED7443B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,10 +33,6 @@ Global
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32845F6D-2539-4FD1-AAAB-24A259C20964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

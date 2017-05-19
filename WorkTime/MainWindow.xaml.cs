@@ -30,8 +30,6 @@ namespace WorkTime
             }
             else
             {
-
-
                 InitializeComponent();
 
                 DataContext = new MainWindowViewModel();
