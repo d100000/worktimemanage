@@ -6,8 +6,8 @@ To manage you work time detail
 
 ## Login Demo
 ```
-This ia a login window demo for WorkTimeManger .
+New look ,and new Windows for WorkTimeManager,fast Login and Fast show,fix some bug and make using batter!
 
 ```
 
-![logindemo](https://raw.githubusercontent.com/d100000/worktimemanage/master/WorkTime/demo/logindemo.gif "logindemo")
+![logindemo](https://github.com/d100000/worktimemanage/blob/master/WorkTime/demo/%E4%BC%98%E5%8C%96%E7%89%88WorkTimeManage1.0.gif "New Demo")
