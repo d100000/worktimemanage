@@ -261,9 +261,6 @@ namespace WorkTime.ViewModel
 
                     Mainthread.BeginInvoke((Action)delegate ()// 异步更新界面
                     {
-
-
-
                         if (datasObject.code != 0)
                         {
 
@@ -342,13 +339,69 @@ namespace WorkTime.ViewModel
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        private void EditData()
+        {
+            var loadingDialog = new LoadingDialog();
+            var result = DialogHost.Show(loadingDialog, "RootDialog", delegate (object sender, DialogOpenedEventArgs args)
+            {
+                // 获取编辑数据
+                WorkTimeData postWorkTimeData = new WorkTimeData()
+                {
+                    __ID__ = EditItemData.GetID(),
+                    work_date = Common.GetTimeSecond(WorkDateTime),
+                    title = this.Title,
+                    detail = this.Detail,
+                    type = this.Type,
+                    state = this.Status,
+                    begin_time = Common.GetTimeSecond(this.Begin_time),
+                    end_time = Common.GetTimeSecond(this.End_time),
+                    spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
+                };
+
+                string temp = NetHelper.getProperties(postWorkTimeData);
+
+                string addUrl = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken;
+
+                var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
+
+                var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
+
+
+                ThreadStart start = delegate ()
+                {
+
+                    Mainthread.BeginInvoke((Action)delegate ()// 异步更新界面
+                    {
+                        if (returnData.code != 0)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                        CleanData(null);
+
+                        args.Session.Close(false);
+                    });
+
+                };
+
+                new Thread(start).Start(); // 启动线程
+
+            });
+        }
+
+        /// <summary>
         /// 删除数据
         /// </summary>
         /// <param name="o"></param>
         public void DeleteDataGridItem(object o)
         {
             Int64 id = SelecTimeDataViewData.GetID();
-            string deleteData = "http://api.timemanager.online/time_manager/data/delete?access_token=" + MainStaticData.AccessToken + "&id=" + id;
+            string deleteData = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken + "&id=" + id;
             var datas = NetHelper.HttpCall(deleteData, null, HttpEnum.Get);
 
             var returnData = JsonHelper.Deserialize<ReturnData<object>>(datas);
@@ -424,6 +477,7 @@ namespace WorkTime.ViewModel
                     DataItems[i] = EditItemData;
                 }
             }
+            EditData();
         }
 
         #endregion

@@ -168,6 +168,7 @@
   <ItemGroup>
     <Resource Include="logo.ico" />
     <Resource Include="demo\logindemo.gif" />
+    <Resource Include="demo\优化版WorkTimeManage1.0.gif" />
     <Content Include="libs\Dragablz.dll" />
     <Content Include="libs\MahApps.Metro.dll" />
     <Content Include="libs\MaterialDesignColors.dll" />
