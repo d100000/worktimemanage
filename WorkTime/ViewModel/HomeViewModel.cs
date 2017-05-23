@@ -299,99 +299,58 @@ namespace WorkTime.ViewModel
         /// <param name="o"></param>
         public void AddNewData(object o)
         {
-            WorkTimeData postWorkTimeData = new WorkTimeData()
+            var result = DialogHost.Show(new LoadingDialog(), "RootDialog", delegate (object sender, DialogOpenedEventArgs args)
             {
-                work_date = Common.GetTimeSecond(WorkDateTime),
-                title = this.Title,
-                detail = this.Detail,
-                type = this.Type,
-                state = this.Status,
-                begin_time = Common.GetTimeSecond(this.Begin_time),
-                end_time = Common.GetTimeSecond(this.End_time),
-                spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
-            };
-
-            string temp = NetHelper.getProperties(postWorkTimeData);
-
-            string addUrl = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
-
-            var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
-
-            var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
-            if (returnData.code == 0)
-            {
-                DataItems.Add(new WorkTimeData_ViewData(returnData.data));
-
-                Title = "";
-                Detail = "";
-            }
-            else
-            {
-                Task.Factory.StartNew(() =>
-                {
-                    Thread.Sleep(500);
-                }).ContinueWith(t =>
-                {
-                    ((UserContorller.Home)o).SnackbarOne.MessageQueue.Enqueue(returnData.message);
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-            }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void EditData()
-        {
-            var loadingDialog = new LoadingDialog();
-            var result = DialogHost.Show(loadingDialog, "RootDialog", delegate (object sender, DialogOpenedEventArgs args)
-            {
-                // 获取编辑数据
-                WorkTimeData postWorkTimeData = new WorkTimeData()
-                {
-                    __ID__ = EditItemData.GetID(),
-                    work_date = Common.GetTimeSecond(WorkDateTime),
-                    title = this.Title,
-                    detail = this.Detail,
-                    type = this.Type,
-                    state = this.Status,
-                    begin_time = Common.GetTimeSecond(this.Begin_time),
-                    end_time = Common.GetTimeSecond(this.End_time),
-                    spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
-                };
-
-                string temp = NetHelper.getProperties(postWorkTimeData);
-
-                string addUrl = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken;
-
-                var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
-
-                var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
-
-
                 ThreadStart start = delegate ()
                 {
+                    WorkTimeData postWorkTimeData = new WorkTimeData()
+                    {
+                        work_date = Common.GetTimeSecond(WorkDateTime),
+                        title = this.Title,
+                        detail = this.Detail,
+                        type = this.Type,
+                        state = this.Status,
+                        begin_time = Common.GetTimeSecond(this.Begin_time),
+                        end_time = Common.GetTimeSecond(this.End_time),
+                        spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
+                    };
+
+                    string temp = NetHelper.getProperties(postWorkTimeData);
+
+                    string addUrl = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
+
+                    var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
+
+                    var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
+
 
                     Mainthread.BeginInvoke((Action)delegate ()// 异步更新界面
                     {
-                        if (returnData.code != 0)
+                        args.Session.Close(false);
+                        if (returnData.code == 0)
                         {
+                            DataItems.Add(new WorkTimeData_ViewData(returnData.data));
 
+                            Title = "";
+                            Detail = "";
                         }
                         else
                         {
-
+                            MessageShow(o, returnData.message);
                         }
                         CleanData(null);
-
-                        args.Session.Close(false);
                     });
-
                 };
-
                 new Thread(start).Start(); // 启动线程
-
             });
+        }
+
+        /// <summary>
+        /// 编辑数据
+        /// </summary>
+        private void EditData()
+        {
+            
         }
 
         /// <summary>
@@ -477,7 +436,68 @@ namespace WorkTime.ViewModel
                     DataItems[i] = EditItemData;
                 }
             }
-            EditData();
+            var result = DialogHost.Show(new LoadingDialog(), "RootDialog", delegate (object sender, DialogOpenedEventArgs args)
+            {
+                // 获取编辑数据
+                WorkTimeData postWorkTimeData = new WorkTimeData()
+                {
+                    __ID__ = EditItemData.GetID(),
+                    work_date = Common.GetTimeSecond(WorkDateTime),
+                    title = this.Title,
+                    detail = this.Detail,
+                    type = this.Type,
+                    state = this.Status,
+                    begin_time = Common.GetTimeSecond(this.Begin_time),
+                    end_time = Common.GetTimeSecond(this.End_time),
+                    spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
+                };
+
+                string temp = NetHelper.getProperties(postWorkTimeData);
+
+                string addUrl = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken;
+
+                var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
+
+                var returnData = JsonHelper.Deserialize<ReturnData<WorkTimeData>>(datas);
+
+
+                ThreadStart start = delegate ()
+                {
+
+                    Mainthread.BeginInvoke((Action)delegate ()// 异步更新界面
+                    {
+                        args.Session.Close(false);
+                        if (returnData.code != 0)
+                        {
+                            MessageShow(o, returnData.message);
+                        }
+                        else
+                        {
+                            MessageShow(o, "Edit Success !");
+                        }
+                        CleanData(null);
+
+                    });
+
+                };
+
+                new Thread(start).Start(); // 启动线程
+
+            });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void MessageShow(object viewdata,string Message)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(500);
+            }).ContinueWith(t =>
+            {
+                ((UserContorller.Home)viewdata).SnackbarOne.MessageQueue.Enqueue(Message);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         #endregion
