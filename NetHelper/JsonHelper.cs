@@ -26,6 +26,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
+                // TODO:错误处理
                 return new T();
             }
         }

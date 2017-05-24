@@ -43,12 +43,15 @@ namespace Helper
             string lcHtml = string.Empty;
             Encoding enc = Encoding.GetEncoding("UTF-8");
             Stream stream = response.GetResponseStream();
-            StreamReader streamReader = new StreamReader(stream, enc);
-            lcHtml = streamReader.ReadToEnd();
+            if (stream != null)
+            {
+                StreamReader streamReader = new StreamReader(stream, enc);
+                lcHtml = streamReader.ReadToEnd();
+            }
             return (lcHtml);
         }
 
-        public static string getProperties<T>(T t)
+        public static string GETProperties<T>(T t)
         {
             string tStr = string.Empty;
             if (t == null)
@@ -76,7 +79,7 @@ namespace Helper
                 }
                 else
                 {
-                    getProperties(value);
+                    GETProperties(value);
                 }
             }
             tStr = tStr.Substring(0, tStr.Length - 1);

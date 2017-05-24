@@ -315,7 +315,7 @@ namespace WorkTime.ViewModel
                         spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
                     };
 
-                    string temp = NetHelper.getProperties(postWorkTimeData);
+                    string temp = NetHelper.GETProperties(postWorkTimeData);
 
                     string addUrl = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
 
@@ -331,8 +331,8 @@ namespace WorkTime.ViewModel
                         {
                             DataItems.Add(new WorkTimeData_ViewData(returnData.data));
 
-                            Title = "";
-                            Detail = "";
+                            MessageShow(o, "Add Success !");
+
                         }
                         else
                         {
@@ -360,7 +360,7 @@ namespace WorkTime.ViewModel
         public void DeleteDataGridItem(object o)
         {
             Int64 id = SelecTimeDataViewData.GetID();
-            string deleteData = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken + "&id=" + id;
+            string deleteData = "http://api.timemanager.online/time_manager/data/delete?access_token=" + MainStaticData.AccessToken + "&id=" + id;
             var datas = NetHelper.HttpCall(deleteData, null, HttpEnum.Get);
 
             var returnData = JsonHelper.Deserialize<ReturnData<object>>(datas);
@@ -452,7 +452,7 @@ namespace WorkTime.ViewModel
                     spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
                 };
 
-                string temp = NetHelper.getProperties(postWorkTimeData);
+                string temp = NetHelper.GETProperties(postWorkTimeData);
 
                 string addUrl = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken;
 
