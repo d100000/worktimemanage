@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "NetHelper\Helper.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTimeTest", "WorkTimeTest\WorkTimeTest.csproj", "{21D8E63C-3406-44B0-AD69-4BE9BE509503}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Update", "Update\Update.csproj", "{CCDAFA08-2097-4DD0-B4B1-0F033651AB98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21D8E63C-3406-44B0-AD69-4BE9BE509503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCDAFA08-2097-4DD0-B4B1-0F033651AB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDAFA08-2097-4DD0-B4B1-0F033651AB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDAFA08-2097-4DD0-B4B1-0F033651AB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDAFA08-2097-4DD0-B4B1-0F033651AB98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,48 @@
+﻿<Window x:Class="Update.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Update"
+        mc:Ignorable="d"
+        WindowState="Normal"
+        WindowStyle='SingleBorderWindow'
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="350" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="250*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Text="最新版本 : "></TextBlock>
+            <TextBlock >v1</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Text="本地版本 : "></TextBlock>
+            <TextBlock >v1</TextBlock>
+        </StackPanel>
+
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="0" BorderBrush="DarkGray" BorderThickness="1">
+            
+        </TextBox>
+
+        <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
+            <Button Height="25" Width="80" Margin="0 0 70 0" Content="更新"></Button>
+            <Button Height="25" Width="80" Margin="70 0 0 0 " Content="取消"></Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
