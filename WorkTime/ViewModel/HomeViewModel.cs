@@ -22,12 +22,14 @@ namespace WorkTime.ViewModel
     {
         #region  声明
 
+        public object ThisContorler;
+
         public ICommand AddNewDataCommand => new AnotherCommandImplementation(AddNewData);
-        public AutoCommand DeleteDataGridItemCommand => new AutoCommand(DeleteDataGridItem);
-        public AutoCommand LoadedCommand => new AutoCommand(Loaded);
-        public AutoCommand DataGridMouseDoubleClickCommand=>new AutoCommand(DataGridMouseDoubleClick);
-        public AutoCommand CleanDataCommand => new AutoCommand(CleanData);
-        public AutoCommand EditDataCommand => new AutoCommand(EditData);
+        public ICommand DeleteDataGridItemCommand => new AnotherCommandImplementation(DeleteDataGridItem);
+        public ICommand LoadedCommand => new AnotherCommandImplementation(Loaded);
+        public ICommand DataGridMouseDoubleClickCommand =>new AnotherCommandImplementation(DataGridMouseDoubleClick);
+        public ICommand CleanDataCommand => new AnotherCommandImplementation(CleanData);
+        public ICommand EditDataCommand => new AnotherCommandImplementation(EditData);
 
         private WorkTimeData _newData = new WorkTimeData();
 
@@ -235,14 +237,15 @@ namespace WorkTime.ViewModel
 
         public void Loaded(Object o)
         {
-            Inint();
+
+            Inint(o);
         }
 
 
         /// <summary>
         /// 初始化，读取在线配置信息
         /// </summary>
-        private void Inint()
+        private void Inint(object o)
         {
             var loadingDialog = new LoadingDialog();
 
@@ -253,6 +256,8 @@ namespace WorkTime.ViewModel
                 string get_data = "http://api.timemanager.online/time_manager/data/select?access_token=" + access_token;
 
                 var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
+
+                this.ThisContorler = o;
 
                 var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<WorkTimeData>>>(datas);
 
@@ -315,6 +320,8 @@ namespace WorkTime.ViewModel
                         spend = (long.Parse(Common.GetTimeSecond(this.End_time)) - (long.Parse(Common.GetTimeSecond(this.Begin_time)))).ToString()
                     };
 
+                    DateTime Temp_end_time = End_time;
+
                     string temp = NetHelper.GETProperties(postWorkTimeData);
 
                     string addUrl = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
@@ -330,28 +337,23 @@ namespace WorkTime.ViewModel
                         if (returnData.code == 0)
                         {
                             DataItems.Add(new WorkTimeData_ViewData(returnData.data));
-
+                            CleanData(null);
+                            this.Begin_time = Temp_end_time;
                             MessageShow(o, "Add Success !");
 
                         }
                         else
                         {
+
                             MessageShow(o, returnData.message);
                         }
-                        CleanData(null);
+
                     });
                 };
                 new Thread(start).Start(); // 启动线程
             });
         }
 
-        /// <summary>
-        /// 编辑数据
-        /// </summary>
-        private void EditData()
-        {
-            
-        }
 
         /// <summary>
         /// 删除数据
@@ -362,11 +364,11 @@ namespace WorkTime.ViewModel
             Int64 id = SelecTimeDataViewData.GetID();
             string deleteData = "http://api.timemanager.online/time_manager/data/delete?access_token=" + MainStaticData.AccessToken + "&id=" + id;
             var datas = NetHelper.HttpCall(deleteData, null, HttpEnum.Get);
-
             var returnData = JsonHelper.Deserialize<ReturnData<object>>(datas);
             if (returnData.code == 0)
             {
                 DataItems.Remove(SelecTimeDataViewData);
+                MessageShow(o,"Delete Success!");
             }
 
         }
@@ -420,7 +422,7 @@ namespace WorkTime.ViewModel
             // update  data 
             EditItemData.title = Title;
             EditItemData.detail = Detail;
-            EditItemData.work_date = Common.GetTimeSecond(WorkDateTime);
+            EditItemData.work_date = (WorkDateTime);
             EditItemData.type = this.Type;
             EditItemData.state = this.Status;
             EditItemData.begin_time = Common.GetTimeSecond(this.Begin_time);
@@ -473,16 +475,15 @@ namespace WorkTime.ViewModel
                         }
                         else
                         {
+                            CleanData(null);
                             MessageShow(o, "Edit Success !");
                         }
-                        CleanData(null);
+
 
                     });
 
                 };
-
                 new Thread(start).Start(); // 启动线程
-
             });
         }
 
@@ -493,10 +494,10 @@ namespace WorkTime.ViewModel
         {
             Task.Factory.StartNew(() =>
             {
-                Thread.Sleep(500);
+
             }).ContinueWith(t =>
             {
-                ((UserContorller.Home)viewdata).SnackbarOne.MessageQueue.Enqueue(Message);
+                ((UserContorller.Home)ThisContorler).SnackbarOne.MessageQueue.Enqueue(Message);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 

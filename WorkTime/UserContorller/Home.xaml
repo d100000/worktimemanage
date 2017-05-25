@@ -12,7 +12,7 @@
              d:DesignHeight="300" d:DesignWidth="800">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="10" />
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=HomeControl}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
@@ -62,12 +62,12 @@
             <DataGrid  ItemsSource="{Binding DataItems,Mode=TwoWay}"  CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding SelecTimeDataViewData}" AutoGenerateColumns="False" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding DataGridMouseDoubleClickCommand}" CommandParameter="10" />
+                        <i:InvokeCommandAction Command="{Binding DataGridMouseDoubleClickCommand}"  CommandParameter="{Binding ElementName=HomeControl}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding type}" Header="Type" Width="54*" />
-                    <DataGridTextColumn Binding="{Binding work_date}" Header="Work_data" Width="61*" />
+                    <DataGridTextColumn Binding="{Binding work_date,StringFormat='{}{0:yyyy-MM-dd }'}" Header="Work_data" Width="61*" />
                     <DataGridTextColumn Binding="{Binding title}" Header="Title" Width="70*" />
                     <md:MaterialDataGridTextColumn Binding="{Binding detail}" Header="Detail" Width="180*" >
                         <DataGridTextColumn.ElementStyle>
@@ -87,7 +87,7 @@
                         <MenuItem Header="Delete" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding DeleteDataGridItemCommand}" CommandParameter="10" />
+                                    <i:InvokeCommandAction Command="{Binding DeleteDataGridItemCommand}" CommandParameter="{Binding ElementName=HomeControl}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </MenuItem>

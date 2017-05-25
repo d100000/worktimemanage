@@ -55,16 +55,16 @@ namespace WorkTime.Entity
             }
         }
 
-        public string work_date
+        public DateTime work_date
         {
             get
             {
-                return Common.ReturnDateTime(_workTimeData.work_date).ToShortDateString();
+                return Common.ReturnDateTime(_workTimeData.work_date);
 
             }
             set
             {
-                _workTimeData.work_date = (value);
+                _workTimeData.work_date = (Common.GetTimeSecond(value));
                 this.OnPropertyChanged("work_date");
             }
         }

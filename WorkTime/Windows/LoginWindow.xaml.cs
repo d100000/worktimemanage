@@ -115,5 +115,10 @@ namespace WorkTime.Windows
                 this.Login_click(sender, e);
             }
         }
+
+        private void Hyperlink_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/d100000/worktimemanage");  
+        }
     }
 }
