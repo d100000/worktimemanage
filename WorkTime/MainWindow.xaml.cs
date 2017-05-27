@@ -94,5 +94,16 @@ namespace WorkTime
 
         }
 
+        private void Update_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("Update" + ".exe");
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }

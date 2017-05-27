@@ -27,6 +27,12 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         >
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands ShowLastSeparator="False">
+            <Button ToolTip="版本更新" 
+                    Content="更新" Click="Update_OnClick"/>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
 
 
     <md:DialogHost x:Name="MainDialogHost" Identifier="RootDialog">

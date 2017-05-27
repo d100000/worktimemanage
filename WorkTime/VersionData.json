@@ -1,0 +1,8 @@
+﻿// 20170526173123
+// http://api.timemanager.online/time_manager/system/get_system_data
+
+{
+  "Version": "beat v0.3",
+  "Date": "2017-4-26",
+  "Message": "test data"
+}

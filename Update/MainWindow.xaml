@@ -28,21 +28,23 @@
 
         <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
             <TextBlock Text="最新版本 : "></TextBlock>
-            <TextBlock >v1</TextBlock>
+            <TextBlock Name="NewVersion" >v1</TextBlock>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
             <TextBlock Text="本地版本 : "></TextBlock>
-            <TextBlock >v1</TextBlock>
+            <TextBlock Name="LocalVersion">v1</TextBlock>
         </StackPanel>
 
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="0" BorderBrush="DarkGray" BorderThickness="1">
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="0" BorderBrush="DarkGray" BorderThickness="1" Name="DetailText" IsReadOnly="True" TextWrapping="Wrap" >
             
         </TextBox>
 
         <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
-            <Button Height="25" Width="80" Margin="0 0 70 0" Content="更新"></Button>
-            <Button Height="25" Width="80" Margin="70 0 0 0 " Content="取消"></Button>
+            <Button Name="UpdateButton" Height="25" Width="80" Margin="0 0 70 0" Content="更新" IsEnabled="False" Click="UpdateButton_Click" ></Button>
+            <Button Name="CancelButton" Height="25" Width="80" Margin="70 0 0 0 " Content="取消" Click="CancelButton_Click"></Button>
         </StackPanel>
-
+        <Grid Row="5" Column="1" >
+            <ProgressBar Name="PbProgress" Margin="1" />
+        </Grid>
     </Grid>
 </Window>
