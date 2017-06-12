@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,8 +36,18 @@ namespace WorkTime
                 DataContext = new MainWindowViewModel();
                 
             }
-
+            Init();
             //Tips("Welcome to WorkTimeManager!");
+
+        }
+
+        public void Init()
+        {
+
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory+"app.zip"))
+            {
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory+"app.zip"); // 删除临时目录;
+            }
         }
 
         #region  窗口动效事件

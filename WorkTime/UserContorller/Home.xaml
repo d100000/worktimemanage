@@ -12,6 +12,7 @@
              d:DesignHeight="300" d:DesignWidth="800">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
+            <!-- 添加全局的绑定事件 -->
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=HomeControl}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>

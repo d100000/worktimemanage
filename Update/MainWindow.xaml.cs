@@ -117,12 +117,17 @@ namespace Update
                     else
                     {
                         NewVersion.Text = returnDataObject.data.Version;
-                        DetailText.Text = returnDataObject.data.Message;
                         NewDownloadUrl = returnDataObject.data.DownLoadUrl;
                         if (NewVersion.Text != LocalVersion.Text)
                         {
                             UpdateButton.IsEnabled = true;
+                            DetailText.Text = returnDataObject.data.Message;
                         }
+                        else
+                        {
+                            DetailText.Text = "本地版本已是最新版！";
+                        }
+
                     }
                     // 线程结束后的操作
                 });

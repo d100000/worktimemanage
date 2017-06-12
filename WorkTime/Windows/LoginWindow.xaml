@@ -21,52 +21,99 @@
         WindowStartupLocation="CenterScreen"
         PreviewKeyDown="LoginWindow_OnPreviewKeyDown"
         
-        
         Height="500"
         Width="800"
         MinHeight="500"
         MinWidth="800"
         Title="登陆" >
     <materialDesign:DialogHost  x:Name="LoginDialogHost" Identifier="LoginDialog">
-        <Grid Height="300" Width="400" Margin="0 0 30 80" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Opacity="0.6" Margin="25 0 0 20" Style="{StaticResource MaterialDesignDisplay1TextBlock}" ToolTip="转跳到GitHub网页"><Hyperlink NavigateUri="https://github.com/d100000/worktimemanage" Click="Hyperlink_OnClick">Work Time Manager</Hyperlink></TextBlock>
-            </Grid>
-            <StackPanel  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="30,6" ToolTip="输入用户名" >
-            <materialDesign:PackIcon  Margin="10 10 10 0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBox  x:Name="NameTextBox"  materialDesign:HintAssist.Hint="UserName"  Width="170" 
+        <Grid>
+            <Grid Name="LoginGrid" Height="300" Width="400" Margin="0 0 30 80" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Opacity="0.6" Margin="25 0 0 20" Style="{StaticResource MaterialDesignDisplay1TextBlock}" ToolTip="转跳到GitHub网页"><Hyperlink NavigateUri="https://github.com/d100000/worktimemanage" Click="Hyperlink_OnClick">Work Time Manager</Hyperlink></TextBlock>
+                </Grid>
+                <StackPanel  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="30,6" ToolTip="输入用户名" >
+                    <materialDesign:PackIcon  Margin="10 10 10 0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <TextBox  x:Name="NameTextBox"  materialDesign:HintAssist.Hint="UserName"  Width="170" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-        </StackPanel>
-            <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="30,6,30,7" ToolTip="输入密码">
-            <materialDesign:PackIcon Margin="10 10 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <PasswordBox x:Name="PasswordBox"
+                </StackPanel>
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="30,6,30,7" ToolTip="输入密码">
+                    <materialDesign:PackIcon Margin="10 10 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <PasswordBox x:Name="PasswordBox"
                      materialDesign:HintAssist.Hint="Password" 
                          PreviewKeyDown="PasswordBox_OnPreviewKeyDown"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                          Width="170"/>
-        </StackPanel>
-            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <Button Padding="1"  Style="{StaticResource MaterialDesignFlatButton}" Margin="10 0 17 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="82" Click="Login_click" ToolTip="登录">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Margin="0 0 5 0" Kind="ArrowRightBoldCircleOutline" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                        <TextBlock>Login</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Padding="1"  Style="{StaticResource MaterialDesignFlatButton}" Margin="27 0 5 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="82" Click="Cancel_click" ToolTip="注册">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Margin="0 0 5 0" Kind="AccountBoxOutline" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                        <TextBlock>Sign in</TextBlock>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Button Padding="1"  Style="{StaticResource MaterialDesignFlatButton}" Margin="10 0 17 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="82" Click="Login_click" ToolTip="登录">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Margin="0 0 5 0" Kind="ArrowRightBoldCircleOutline" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBlock>Login</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Padding="1"  Style="{StaticResource MaterialDesignFlatButton}" Margin="27 0 5 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="82" Click="SignIn_click" ToolTip="注册">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Margin="0 0 5 0" Kind="AccountBoxOutline" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBlock>Sign in</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Name="SignInGrid" Height="300" Width="400" Margin="0 0 30 80" VerticalAlignment="Center" HorizontalAlignment="Center"  Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <StackPanel  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="30,6" ToolTip="输入用户名" >
+                    <materialDesign:PackIcon  Margin="10 10 10 0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <TextBox x:Name="SignInUserName"  materialDesign:HintAssist.Hint="UserName"  Width="170" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="30,6,30,7" ToolTip="输入密码">
+                    <materialDesign:PackIcon Margin="10 10 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <PasswordBox x:Name="SignInPassWord" 
+                     materialDesign:HintAssist.Hint="Password" 
+                         PreviewKeyDown="PasswordBox_OnPreviewKeyDown"
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                         Width="170"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="30,6,30,7" ToolTip="输入密码">
+                    <materialDesign:PackIcon Margin="10 10 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <PasswordBox x:Name="SignInConfimPassWord" 
+                     materialDesign:HintAssist.Hint="Confim Password" 
+                         PreviewKeyDown="PasswordBox_OnPreviewKeyDown"
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                         Width="170"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Button Padding="1"  Style="{StaticResource MaterialDesignFlatButton}" Margin="10 0 17 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="82" Click="BackToLogin_OnClick"  ToolTip="登录">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Margin="0 0 5 0" Kind="ArrowLeftBoldCircleOutline" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBlock>Back</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Padding="1"  Style="{StaticResource MaterialDesignFlatButton}" Margin="27 0 5 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="82" Click="SignInNew_OnClick"  ToolTip="注册">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Margin="0 0 5 0" Kind="AccountBoxOutline" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBlock>Sign in</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
     </materialDesign:DialogHost>
 </controls:MetroWindow>
