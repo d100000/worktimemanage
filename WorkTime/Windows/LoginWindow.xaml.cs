@@ -33,6 +33,10 @@ namespace WorkTime.Windows
         {
             InitializeComponent();
 
+            // test log 
+
+            LogHelper.AddLog("test log"+DateTime.Now.ToLocalTime());
+
         }
         
 
