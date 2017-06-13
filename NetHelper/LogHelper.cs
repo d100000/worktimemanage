@@ -29,7 +29,19 @@ namespace Helper
         /// <param name="message"></param>
         public static void AddLog(string message)
         {
-            LogQueue.Enqueue(message);
+            string logContent = $"[{DateTime.Now:yyyy-MM-dd hh:mm:ss}] =>{message}";
+            LogQueue.Enqueue(logContent);
+            if (!_isThreadBegin)
+            {
+                BeginThread();
+            }
+        }
+
+        public static void AddLog(Exception ex)
+        {
+            var logContent = $"[{DateTime.Now:yyyy-MM-dd hh:mm:ss}]错误发生在：{ex.Source}，\r\n 内容：{ex.Message}";
+            logContent += $"\r\n  跟踪：{ex.StackTrace}";
+            LogQueue.Enqueue(logContent);
             if (!_isThreadBegin)
             {
                 BeginThread();
@@ -99,7 +111,9 @@ namespace Helper
 
             var strLog = new StringBuilder();
 
-            var lineNum = LogQueue.Count > 10 ? 10 : LogQueue.Count;
+            var onceTime = 50;
+
+            var lineNum = LogQueue.Count > onceTime ? onceTime : LogQueue.Count;
 
             for (var i = 0; i < lineNum; i++)
             {

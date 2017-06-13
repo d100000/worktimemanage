@@ -33,9 +33,12 @@ namespace WorkTime.Windows
         {
             InitializeComponent();
 
-            // test log 
+            for (int i = 0; i < 200; i++)
+            {
+                LogHelper.AddLog("test log" + DateTime.Now.ToLongTimeString());
+            }
 
-            LogHelper.AddLog("test log"+DateTime.Now.ToLocalTime());
+            LogHelper.AddLog("写入完毕"+DateTime.Now.ToLongTimeString());
 
         }
         

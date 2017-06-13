@@ -2,7 +2,7 @@
 // http://api.timemanager.online/time_manager/system/get_system_data
 
 {
-  "Version": "beat v0.3",
-  "Date": "2017-4-26",
-  "Message": "test data"
+  "Version": "beat v0.6",
+  "Date": "2017-06-13",
+  "Message": ""
 }
