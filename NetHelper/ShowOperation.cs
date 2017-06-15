@@ -89,8 +89,6 @@ namespace Helper
         /// 关闭高度时的动画
         /// </summary>
         /// <param name="grid"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
         public static void CloseGridHeight(Grid grid)
         {
             DoubleAnimation da = new DoubleAnimation
@@ -124,8 +122,6 @@ namespace Helper
         /// 关闭高度时的动画
         /// </summary>
         /// <param name="grid"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
         public static void CloseHeight(FrameworkElement grid)
         {
             DoubleAnimation da = new DoubleAnimation
@@ -173,10 +169,10 @@ namespace Helper
             };
             window.BeginAnimation(UIElement.OpacityProperty, da);//开始动画
 
-            ThreadStart start = delegate ()
+            ThreadStart start = delegate
             {
                 Thread.Sleep((int)(second * 1000));
-                mainthread.BeginInvoke((Action)delegate ()// 异步更新界面
+                mainthread.BeginInvoke((Action)delegate // 异步更新界面
                 {
                     window.Visibility = Visibility.Hidden;
                     // 线程结束后的操作

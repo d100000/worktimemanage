@@ -23,6 +23,15 @@ namespace WorkTime.UserContorller
         public AddItem()
         {
             InitializeComponent();
+
+            TypeList.ItemsSource=new List<string>()
+            {
+                "one",
+                "oneoneone",
+                "ooneoneoneoneoneonene",
+                "oneoneoneoneoneoneoneoneone",
+            };
+           
         }
     }
 }

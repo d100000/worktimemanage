@@ -67,8 +67,6 @@ namespace WorkTime
 
             MenuToggleButton.IsChecked = false;
 
-            MessageTips("Test get MessageWindow !", sender, e);
-
         }
 
         public void SetAccessToken(string accessToken)

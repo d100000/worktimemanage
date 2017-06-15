@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Helper;
 using WorkTime.BaseModel;
 
@@ -21,11 +15,21 @@ namespace WorkTime
             {
                 if (_typeCollection.Count == 0)
                 {
-                    string get_data = "http://api.timemanager.online/time_manager/user/get_user_type?access_token=" + MainStaticData.AccessToken;
+                    string getData = "http://api.timemanager.online/time_manager/user/get_user_type?access_token=" + MainStaticData.AccessToken;
 
-                    var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
+                    var datas = NetHelper.HttpCall(getData, null, HttpEnum.Get);
                     var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<string>>>(datas);
                     _typeCollection = datasObject.code == 0 ? datasObject.data : new ObservableCollection<string>();
+                    if (_typeCollection.Count == 0)
+                    {
+                        _typeCollection=new ObservableCollection<string>()
+                        {
+                            "Data",
+                            "Common",
+                            "Other",
+                            "Work",
+                        };
+                    }
                 }
                 return _typeCollection;
             }

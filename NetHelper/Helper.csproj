@@ -55,6 +55,7 @@
     <Compile Include="NetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowOperation.cs" />
+    <Compile Include="XMLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\Newtonsoft.Json.dll" />

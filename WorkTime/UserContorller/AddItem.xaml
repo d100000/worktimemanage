@@ -6,8 +6,28 @@
              xmlns:local="clr-namespace:WorkTime.UserContorller"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             x:Name="AddItemContorl"
+             d:DesignHeight="500" d:DesignWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="32*"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <TextBox   Height="30" Width="200" Margin="10 0 0 0" ></TextBox>
+            <Button Margin="10 0 0 0" >+</Button>
+        </StackPanel>
+        <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Name="TypeList" Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Width="250" >
             
+        </ListBox>
+        
+        
     </Grid>
 </UserControl>

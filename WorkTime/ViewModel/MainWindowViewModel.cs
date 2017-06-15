@@ -16,7 +16,8 @@ namespace WorkTime.ViewModel
         {
             Items = new[]
             {
-                new ContorllerItem("Home", new Home(){ DataContext = new HomeViewModel() })
+                new ContorllerItem("Home", new Home(){ DataContext = new HomeViewModel() }),
+                new ContorllerItem("AddItem", new AddItem(){ DataContext = new AddItemViewModel()}),
             };
             
 

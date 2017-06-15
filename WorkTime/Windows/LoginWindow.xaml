@@ -87,7 +87,6 @@
                     <materialDesign:PackIcon Margin="10 10 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     <PasswordBox x:Name="SignInPassWord" 
                      materialDesign:HintAssist.Hint="Password" 
-                         PreviewKeyDown="PasswordBox_OnPreviewKeyDown"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                          Width="170"/>
                 </StackPanel>
@@ -95,7 +94,6 @@
                     <materialDesign:PackIcon Margin="10 10 10 0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     <PasswordBox x:Name="SignInConfimPassWord" 
                      materialDesign:HintAssist.Hint="Confim Password" 
-                         PreviewKeyDown="PasswordBox_OnPreviewKeyDown"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                          Width="170"/>
                 </StackPanel>

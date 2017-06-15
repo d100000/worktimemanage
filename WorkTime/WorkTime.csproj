@@ -90,6 +90,7 @@
     <Compile Include="UserContorller\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddItemViewModel.cs" />
     <Compile Include="ViewModel\AnotherCommandImplementation.cs" />
     <Compile Include="ViewModel\AutoCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
