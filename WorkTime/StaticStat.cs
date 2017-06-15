@@ -24,7 +24,6 @@ namespace WorkTime
                     {
                         _typeCollection=new ObservableCollection<string>()
                         {
-                            "Data",
                             "Common",
                             "Other",
                             "Work",

@@ -272,6 +272,7 @@ namespace WorkTime.ViewModel
                         }
                         else
                         {
+                            DataItems.Clear();
                             foreach (var item in datasObject.data)
                             {
                                 DataItems.Add(new WorkTimeData_ViewData(item));

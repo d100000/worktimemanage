@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WorkTime.UserContorller"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              x:Name="AddItemContorl"
              d:DesignHeight="500" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <!-- 添加全局的绑定事件 -->
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=HomeControl}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -21,13 +28,26 @@
             <RowDefinition Height="32*"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-            <TextBox   Height="30" Width="200" Margin="10 0 0 0" ></TextBox>
-            <Button Margin="10 0 0 0" >+</Button>
+            <TextBox Name="AddTypeTextBox"  Height="30" Width="200" Margin="10 0 0 0" Text="{Binding AddTypeText,Mode=TwoWay}" > </TextBox>
+            <Button Margin="10 0 0 0" Command="{Binding AddTypeNameCommand}" CommandParameter="{Binding ElementName=AddItemContorl}" >+</Button>
         </StackPanel>
-        <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Name="TypeList" Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Width="250" >
-            
+        <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Name="TypeList" Grid.Row="2" Grid.Column="0" Margin="5 0 0 0" Width="250" 
+                 ItemsSource="{Binding TypeList,Mode=TwoWay}" SelectedItem="{Binding SelectType,Mode=TwoWay}">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding DeleteItemCommand}" CommandParameter="{Binding ElementName=AddItemContorl}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+
         </ListBox>
-        
-        
+
+        <md:Snackbar Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="3" MessageQueue="{md:MessageQueue}" IsActive="False"
+                                             x:Name="SnackbarOne" />
     </Grid>
 </UserControl>
