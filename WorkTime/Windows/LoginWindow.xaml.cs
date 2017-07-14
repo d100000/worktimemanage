@@ -81,7 +81,7 @@ namespace WorkTime.Windows
 
                 ThreadStart start = delegate()
                 {
-                    string url = $"http://api.timemanager.online/time_manager/user/login?name={name}&pw={pw}";
+                    string url = $"https://api.bobdong.cn/time_manager/user/login?name={name}&pw={pw}";
 
                     var ReturnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
 
@@ -161,7 +161,7 @@ namespace WorkTime.Windows
 
                 ThreadStart start = delegate ()
                 {
-                    string url = $"http://api.timemanager.online/time_manager/user/register?name={name}&pw={pw}";
+                    string url = $"https://api.bobdong.cn/time_manager/user/register?name={name}&pw={pw}";
 
                     var ReturnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
 

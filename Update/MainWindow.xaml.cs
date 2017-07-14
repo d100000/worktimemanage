@@ -100,7 +100,7 @@ namespace Update
         {
             ThreadStart start = delegate ()
             {
-                string url = $"http://api.timemanager.online/time_manager/system/get_system_data";
+                string url = $"https://api.bobdong.cn/time_manager/system/get_system_data";
 
                 var returnDatastr = NetHelper.HttpCall(url, null, HttpEnum.Get);
 

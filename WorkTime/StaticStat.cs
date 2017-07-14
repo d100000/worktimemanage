@@ -15,7 +15,7 @@ namespace WorkTime
             {
                 if (_typeCollection.Count == 0)
                 {
-                    string getData = "http://api.timemanager.online/time_manager/user/get_user_type?access_token=" + MainStaticData.AccessToken;
+                    string getData = "https://api.bobdong.cn/time_manager/user/get_user_type?access_token=" + MainStaticData.AccessToken;
 
                     var datas = NetHelper.HttpCall(getData, null, HttpEnum.Get);
                     var datasObject = JsonHelper.Deserialize<ReturnData<ObservableCollection<string>>>(datas);

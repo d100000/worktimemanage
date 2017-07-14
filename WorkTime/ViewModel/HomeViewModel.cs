@@ -253,7 +253,7 @@ namespace WorkTime.ViewModel
             {
                 string access_token = MainStaticData.AccessToken;
 
-                string get_data = "http://api.timemanager.online/time_manager/data/select?access_token=" + access_token;
+                string get_data = "https://api.bobdong.cn/time_manager/data/select?access_token=" + access_token;
 
                 var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
 
@@ -325,7 +325,7 @@ namespace WorkTime.ViewModel
 
                     string temp = NetHelper.GETProperties(postWorkTimeData);
 
-                    string addUrl = "http://api.timemanager.online/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
+                    string addUrl = "https://api.bobdong.cn/time_manager/data/add?access_token=" + MainStaticData.AccessToken;
 
                     var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
 
@@ -363,7 +363,7 @@ namespace WorkTime.ViewModel
         public void DeleteDataGridItem(object o)
         {
             Int64 id = SelecTimeDataViewData.GetID();
-            string deleteData = "http://api.timemanager.online/time_manager/data/delete?access_token=" + MainStaticData.AccessToken + "&id=" + id;
+            string deleteData = "https://api.bobdong.cn/time_manager/data/delete?access_token=" + MainStaticData.AccessToken + "&id=" + id;
             var datas = NetHelper.HttpCall(deleteData, null, HttpEnum.Get);
             var returnData = JsonHelper.Deserialize<ReturnData<object>>(datas);
             if (returnData.code == 0)
@@ -457,7 +457,7 @@ namespace WorkTime.ViewModel
 
                 string temp = NetHelper.GETProperties(postWorkTimeData);
 
-                string addUrl = "http://api.timemanager.online/time_manager/data/update?access_token=" + MainStaticData.AccessToken;
+                string addUrl = "https://api.bobdong.cn/time_manager/data/update?access_token=" + MainStaticData.AccessToken;
 
                 var datas = NetHelper.HttpCall(addUrl, temp, HttpEnum.Post);
 

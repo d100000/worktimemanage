@@ -107,7 +107,7 @@ namespace WorkTime.ViewModel
             {
                 string access_token = MainStaticData.AccessToken;
 
-                string get_data = $"http://api.timemanager.online/time_manager/user/add_user_type?type_name={AddTypeText}&access_token=" + access_token;
+                string get_data = $"https://api.bobdong.cn/time_manager/user/add_user_type?type_name={AddTypeText}&access_token=" + access_token;
 
                 var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
 
@@ -160,7 +160,7 @@ namespace WorkTime.ViewModel
             {
                 string access_token = MainStaticData.AccessToken;
 
-                string get_data = $"http://api.timemanager.online/time_manager/user/delete_user_type?type_name={SelectType}&access_token=" + access_token;
+                string get_data = $"https://api.bobdong.cn/time_manager/user/delete_user_type?type_name={SelectType}&access_token=" + access_token;
 
                 var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
 

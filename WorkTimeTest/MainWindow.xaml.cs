@@ -31,7 +31,7 @@ namespace WorkTimeTest
 
         public void test_net()
         {
-            string url = "http://api.timemanager.online/time_manager/user/login?name=bobdong&pw=bobdong";
+            string url = "https://api.bobdong.cn/time_manager/user/login?name=bobdong&pw=bobdong";
 
 
 
@@ -41,7 +41,7 @@ namespace WorkTimeTest
 
             string access_token = ReturnDataObject.data.access_token;
 
-            string get_data = "http://api.timemanager.online/time_manager/data/select?access_token="+access_token;
+            string get_data = "https://api.bobdong.cn/time_manager/data/select?access_token="+access_token;
 
             var datas = NetHelper.HttpCall(get_data, null, HttpEnum.Get);
 
