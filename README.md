@@ -36,3 +36,6 @@
 ```
 
 ![logindemo](https://github.com/d100000/worktimemanage/blob/master/WorkTime/demo/%E4%BC%98%E5%8C%96%E7%89%88WorkTimeManage1.0.gif "New Demo")
+
+
+最后免费送福利，自己做的小资讯网站：[访问网站](http://fuliyuan.tk)
